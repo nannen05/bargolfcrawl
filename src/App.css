@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: arial;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  padding: 20px;
+  max-width: 300px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.App-intro {
+  font-size: large;
+  max-width: 300px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 16px;
+}
+
+.App-login {
+  display: flex;
+  margin: 20px auto 0;
+  flex-direction: column;
+  max-width: 300px;
+  width: 100%;
+  color: #fff;
+}
+
+.App-login input {
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: 1px solid #fff;
+color: #fff;
+}
+
+.App-login .btn {
+    background: #5ED87C;
+    width: 100%;
+    text-transform: uppercase;
+    max-width: 300px;
+    padding: 10px 0px;
+    color: #fff;
+    transition:0.3s;
+    cursor: pointer;
+}
+
+.App-login .btn:hover {
+    background: #39e664;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #fff;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
