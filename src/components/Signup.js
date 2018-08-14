@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from './logo.svg';
-import './App.css';
-import * as actions from "./store/actions";
+import logo from '../logo.svg';
+import '../App.css';
+import * as actions from "../store/actions";
 import { Link, withRouter } from 'react-router-dom'
 
-class App extends Component {
+class Signup extends Component {
 
   componentDidMount() {
       this.props.fetchData()
@@ -16,14 +16,17 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to End Of Summer (Bar) Golf Tournament</h2>
+          <h2>Signup</h2>
         </div>
         <p className="App-intro">
           To get started, login in using GMAIL and you will be able to update your score.
         </p>
         <div className="App-login">
-            <div className="btn"><Link to="/login"> Login </Link></div>
-            <div className="btn"><Link to="/signup"> Signup </Link></div>
+            <input type="text" placeholder="Email"/>
+            <input type="password" placeholder="Password"/>
+            <div className="btn">Sign Up</div>
+
+            <div className="btn"><Link to="/"> Back </Link></div>
         </div>
       </div>
     );
@@ -37,6 +40,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, actions)(App));
+export default withRouter(connect(mapStateToProps, actions)(Signup));
 
 //export default App

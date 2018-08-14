@@ -38,7 +38,8 @@
   color: #fff;
 }
 
-.App-login input {
+.App-login input,
+input {
   padding: 8px;
   margin-bottom: 10px;
   background-color: transparent;
@@ -55,10 +56,25 @@ color: #fff;
     color: #fff;
     transition:0.3s;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .App-login .btn:hover {
     background: #39e664;
+}
+
+p {
+  color: #fff;
+  margin: 5px 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+span { 
+  color: #fff;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

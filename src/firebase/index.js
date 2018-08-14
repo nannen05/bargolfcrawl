@@ -2,12 +2,12 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 
 const config = {
-    apiKey: "AIzaSyAxzmIxJ052De6uGeNiOImXXiUiyB2JEbc",
-    authDomain: "flamelinktesting.firebaseapp.com",
-    databaseURL: "https://flamelinktesting.firebaseio.com",
-    projectId: "flamelinktesting",
-    storageBucket: "flamelinktesting.appspot.com",
-    messagingSenderId: "304946994944"
+    apiKey: "AIzaSyCGJmpSXrJRPfD4To6eJJVe_zQArqOTWl4",
+    authDomain: "bargolfcrawl.firebaseapp.com",
+    databaseURL: "https://bargolfcrawl.firebaseio.com",
+    projectId: "bargolfcrawl",
+    storageBucket: "bargolfcrawl.appspot.com",
+    messagingSenderId: "723963950318"
   };
 
 const FIREBASE_APP = firebase.initializeApp(config);
