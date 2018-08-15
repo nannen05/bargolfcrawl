@@ -186,7 +186,7 @@ class Score extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Score for {this.state.user.name}</h2>
+          <h2>Score for <span className="cap">{this.state.user.name}</span></h2>
         </div>
         <p>Course Par: {this.state.coursePar}</p>
         <div>{ScoreList}</div>
