@@ -20,6 +20,12 @@ class SingleScore extends Component  {
         this.handleScoreChange.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            score: nextProps.data.score
+        })
+    }
+
     handleScoreChange(e) {
         let scoreValue = e.target.value
         if(e.target.value == this.props.par) {
@@ -40,7 +46,7 @@ class SingleScore extends Component  {
             if(e.target.value == this.props.par + 1) {
                 console.log('bogey')
                 scoreValue = +e.target.value// + +1
-            } else if (e.target.value == this.prop.par + 2) {
+            } else if (e.target.value == this.props.par + 2) {
                 console.log('double bogey')
                 scoreValue = +e.target.value// + +2
             } else {
@@ -148,29 +154,25 @@ class Score extends Component {
 
       const i = userData.findIndex((user) => user.name  === this.props.match.params.player)
 
-      let PlayerScore = []
-      this.props.state.userData[i].courseScore.map((value, index) => {
-          PlayerScore.push( value.score )
-      })
-      this.setState({
-          totalScore: PlayerScore.reduce((a, b) => +a + +b)
-      }, () => {
+      // let PlayerScore = []
+      // this.props.state.userData[i].courseScore.map((value, index) => {
+      //     PlayerScore.push( value.score )
+      // })
+      // this.setState({
+      //     totalScore: PlayerScore.reduce((a, b) => +a + +b)
+      // }, () => {
           
-      })
+      // })
 
       
-
       this.props.changeScore(value, index - 1, i)
-
-      this.getTotalScore()
   }
 
   renderScoreList() {
-
-      const i = userData.findIndex((user) => user.name  === this.props.match.params.player);
+      const i = this.props.state.userData.findIndex((user) => user.name  === this.props.match.params.player);
 
       const user = userData[i]
-      let Score = user.courseScore.map((value, index) =>  {
+      let Score = this.props.state.userData[i].courseScore.map((value, index) =>  {
           return <SingleScore data={value} par={this.state.courseHoles[index].par} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
       })
       
@@ -189,6 +191,7 @@ class Score extends Component {
         <p>Course Par: {this.state.coursePar}</p>
         <div>{ScoreList}</div>
         <div><span>Total Score: {totalScore}</span></div>
+        <div className="btn"><Link to="/"> Back </Link></div>
       </div>
     );
   }

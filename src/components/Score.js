@@ -180,9 +180,9 @@ class Score extends Component {
 
 
 
-const mapStateToProps = ({ DATA }) => {
+const mapStateToProps = (state) => {
   return {
-    DATA
+    state
   };
 };
 

@@ -24,6 +24,9 @@ class App extends Component {
         <div className="App-login">
             <div className="btn"><Link to="/login"> Login </Link></div>
             <div className="btn"><Link to="/signup"> Signup </Link></div>
+            <div className="btn"><Link to="/scores"> Scores </Link></div>
+            <div className="btn"><Link to="/score/nick"> Nick </Link></div>
+            <div className="btn"><Link to="/score/jason"> Jason </Link></div>
         </div>
       </div>
     );
