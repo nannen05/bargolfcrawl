@@ -77,6 +77,10 @@ span {
   color: #fff;
 }
 
+span.cap {
+    text-transform: capitalize;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #fff;
     opacity: 1; /* Firefox */

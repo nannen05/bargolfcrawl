@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { Link, withRouter } from 'react-router-dom'
 //import logo from './logo.svg';
 import '../App.css';
 import * as actions from "../store/actions";
@@ -68,63 +69,22 @@ class SingleScore extends Component  {
 class Score extends Component {
   constructor(props) {
     super(); // or super(props) ?
-    this.state = {
-          score: [
-            {
-              "par": 4,
-              "score": 0,
-            },
-            {
-              "par": 4,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            },
-            { 
-              "par": 5,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            },
-            {
-              "par": 5,
-              "score": 0,
-            }
-          ],
-          holes: "",
-          totalScore: 0,
-          coursePar: 0
-      }
 
       this.getScore.bind(this)
+      this.renderScores.bind(this)
   }
  
   componentDidMount() {
-      let parScore = []
-      this.state.score.map((value, index) => {
-          console.log(value)
-          parScore.push( value.par )
-      })
-      this.setState({
-          holes: this.state.score.length,
-          coursePar: parScore.reduce((a, b) => a + b)
-      })
+      console.log(this.props)
+      // let parScore = []
+      // this.state.score.map((value, index) => {
+      //     console.log(value)
+      //     parScore.push( value.par )
+      // })
+      // this.setState({
+      //     holes: this.state.score.length,
+      //     coursePar: parScore.reduce((a, b) => a + b)
+      // })
   }
 
   getTotalScore() {
@@ -151,28 +111,27 @@ class Score extends Component {
       console.log(this.state.totalScore)
   }
 
-  renderScoreList() {
-
-      let Score = this.state.score.map((score, index) =>  {
-          return <SingleScore data={score} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
+  renderScores() {
+      const scores = this.props.state.userData.map((value, index) => {
+          console.log(value)
+          return <p key={index}><span className="cap">{value.name}</span> - Score: <span>{value.totalScore}</span></p>
       })
-      
-      return Score
+
+      return scores
   }
  
   render() {
-    
-    let ScoreList = this.renderScoreList()
-    let totalScore = this.getScore
+    let ScoreList = this.renderScores()
 
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Score</h2>
+          <h2>Player Scores</h2>
+          <div>
+            {ScoreList}
+          </div>
+          <div className="btn"><Link to="/"> Back </Link></div>
         </div>
-        <p>Course Par: {this.state.coursePar}</p>
-        <div>{ScoreList}</div>
-        <div><span>Total Score: {this.state.totalScore}</span></div>
       </div>
     );
   }

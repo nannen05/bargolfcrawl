@@ -18,12 +18,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to End Of Summer (Bar) Golf Tournament</h2>
         </div>
-        <p className="App-intro">
+        {/* <p className="App-intro">
           To get started, login in using GMAIL and you will be able to update your score.
-        </p>
+        </p> */}
         <div className="App-login">
-            <div className="btn"><Link to="/login"> Login </Link></div>
-            <div className="btn"><Link to="/signup"> Signup </Link></div>
+            {/* <div className="btn"><Link to="/login"> Login </Link></div>
+             <div className="btn"><Link to="/signup"> Signup </Link></div> */}
             <div className="btn"><Link to="/scores"> Scores </Link></div>
             <div className="btn"><Link to="/score/nick"> Nick </Link></div>
             <div className="btn"><Link to="/score/jason"> Jason </Link></div>
