@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { Link, withRouter } from 'react-router-dom'
 //import logo from './logo.svg';
 import '../App.css';
 import * as actions from "../store/actions";
 import update from 'react-addons-update';
-import { USERS } from '../data'
+import { userData } from '../data'
 
 
 class SingleScore extends Component  {
@@ -12,7 +13,7 @@ class SingleScore extends Component  {
         super()
 
         this.state = {
-            score: '',
+            score: props.data.score,
             calculatedScore: '',
         }
 
@@ -21,29 +22,29 @@ class SingleScore extends Component  {
 
     handleScoreChange(e) {
         let scoreValue = e.target.value
-        if(e.target.value == this.props.data.par) {
+        if(e.target.value == this.props.par) {
             console.log('par')
             scoreValue = e.target.value
-        } else if (e.target.value < this.props.data.par) {
-            if(e.target.value == this.props.data.par - 1) {
+        } else if (e.target.value < this.props.par) {
+            if(e.target.value == this.props.par - 1) {
                 console.log('birdie')
                 scoreValue = e.target.value
-            } else if (e.target.value == this.props.data.par - 2) {
+            } else if (e.target.value == this.props.par - 2) {
                 console.log('eagle')
                 scoreValue = e.target.value
-            } else if (e.target.value == this.props.data.par - 3) {
+            } else if (e.target.value == this.props.par - 3) {
                 console.log('double eagle')
                 scoreValue = e.target.value
             }
-        } else if (e.target.value > this.props.data.par) {
-            if(e.target.value == this.props.data.par + 1) {
+        } else if (e.target.value > this.props.par) {
+            if(e.target.value == this.props.par + 1) {
                 console.log('bogey')
                 scoreValue = +e.target.value// + +1
-            } else if (e.target.value == this.props.data.par + 2) {
+            } else if (e.target.value == this.prop.par + 2) {
                 console.log('double bogey')
                 scoreValue = +e.target.value// + +2
             } else {
-                let higherScore = e.target.value - this.props.data.par
+                let higherScore = e.target.value - this.props.par
                 scoreValue = +e.target.value// + +higherScore
             }
         }
@@ -57,11 +58,10 @@ class SingleScore extends Component  {
     }
 
     render() {
-        
         return (
            <div>
-              <p>Par: <span>{this.props.data.par}</span></p>
-              <input type="text" placeholder={"Score for Hole " + this.props.id} id={this.props.id} value={this.props.data.score} onChange={e => this.handleScoreChange(e, this.props.id)}/>
+              <p>Par: <span>{this.props.par}</span></p>
+              <input type="text" placeholder={"Score for Hole " + this.props.id} id={this.props.id} value={this.state.score} onChange={e => this.handleScoreChange(e, this.props.id)}/>
            </div>
         )
     }
@@ -73,42 +73,33 @@ class Score extends Component {
     
     this.state = {
           user: '',
-          score: [
+          courseHoles: [
             {
               "par": 4,
-              "score": 0,
             },
             {
               "par": 4,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             },
             { 
               "par": 5,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             },
             {
               "par": 5,
-              "score": 0,
             }
           ],
           holes: "",
@@ -117,66 +108,78 @@ class Score extends Component {
       }
 
       this.getScore.bind(this)
+      this.getTotalScore.bind(this);
   }
  
   componentDidMount() {
-      this.props.fetchUser()
       let parScore = []
-      const i = USERS.findIndex((user) => user.name  === this.props.match.params.player);
-      const player = USERS[i]
-      this.state.score.map((value, index) => {
-          console.log(value)
+      const i = userData.findIndex((user) => user.name  === this.props.match.params.player);
+      const player = userData[i]
+      let PlayerScore = []
+      this.props.state.userData[i].courseScore.map((value, index) => {
+          PlayerScore.push( value.score )
+      })
+
+      this.state.courseHoles.map((value, index) => {
           parScore.push( value.par )
       })
       this.setState({
           user: player,
-          holes: this.state.score.length,
-          coursePar: parScore.reduce((a, b) => a + b)
+          holes: this.state.courseHoles.length,
+          coursePar: parScore.reduce((a, b) => a + b),
+          totalScore: PlayerScore.reduce((a, b) => +a + +b)
       })
+
   }
 
   getTotalScore() {
-      return <span>this.state.totalScore</span>
+      const i = userData.findIndex((user) => user.name  === this.props.match.params.player);
+      return <span>{ this.props.state.userData[i].totalScore }</span>
   }
 
   getScore(value, index) {
 
-      let newScore = this.state.score
-      newScore[index - 1].score = value
-      let updatedScore = +value + +this.state.totalScore
-      this.setState({
-          newScore
-      })
+      // let newScore = this.state.score
+      // newScore[index - 1].score = value
+      // let updatedScore = +value + +this.state.totalScore
+      // this.setState({
+      //     newScore
+      // })
+
+      const i = userData.findIndex((user) => user.name  === this.props.match.params.player)
 
       let PlayerScore = []
-      this.state.user.score.map((value, index) => {
-          console.log(value.score)
+      this.props.state.userData[i].courseScore.map((value, index) => {
           PlayerScore.push( value.score )
       })
       this.setState({
           totalScore: PlayerScore.reduce((a, b) => +a + +b)
+      }, () => {
+          
       })
 
-      console.log(this.state.totalScore)
+      
+
+      this.props.changeScore(value, index - 1, i)
+
+      this.getTotalScore()
   }
 
   renderScoreList() {
 
+      const i = userData.findIndex((user) => user.name  === this.props.match.params.player);
 
-      const i = USERS.findIndex((user) => user.name  === this.props.match.params.player);
-
-      const user = USERS[i]
-      let Score = user.score.map((value, index) =>  {
-          return <SingleScore data={value} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
+      const user = userData[i]
+      let Score = user.courseScore.map((value, index) =>  {
+          return <SingleScore data={value} par={this.state.courseHoles[index].par} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
       })
       
       return Score
   }
  
   render() {
-    
     let ScoreList = this.renderScoreList()
-    let totalScore = this.getScore
+    let totalScore = this.getTotalScore()
 
     return (
       <div className="App">
@@ -185,7 +188,7 @@ class Score extends Component {
         </div>
         <p>Course Par: {this.state.coursePar}</p>
         <div>{ScoreList}</div>
-        <div><span>Total Score: {this.state.totalScore}</span></div>
+        <div><span>Total Score: {totalScore}</span></div>
       </div>
     );
   }
@@ -194,10 +197,9 @@ class Score extends Component {
 
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    
+    state
   };
 };
 
-export default connect(mapStateToProps, actions)(Score);
+export default withRouter(connect(mapStateToProps, actions)(Score));

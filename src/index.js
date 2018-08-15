@@ -16,9 +16,15 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Score from "./components/Score";
 import PlayerScore from "./components/PlayerScore";
+
+import { userData } from './data'
 import './index.css'
 
-const store = createStore(rootReducer, {}, applyMiddleware(reduxThunk));
+const defaultState = {
+  userData
+};
+
+const store = createStore(rootReducer, defaultState, applyMiddleware(reduxThunk));
 
 const history = syncHistoryWithStore(createBrowserHistory(), store);
 //const history = createBrowserHistory()

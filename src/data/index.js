@@ -1,67 +1,71 @@
-export const USERS = [
+export const userData = [
 	{
+		id: "0",
 		name: "nick",
-		score: [
+		courseScore: [
 			{
-              "score": 3,
+              "score": 0,
             },
             {
-              "score": 4,
+              "score": 0,
             },
             {
-              "score": 5,
+              "score": 0,
             },
             {
-              "score": 3,
+              "score": 0,
             },
             { 
-              "score": 3,
+              "score": 0,
             },
             {
-              "score": 3,
+              "score": 0,
             },
             {
-              "score": 3,
+              "score": 0,
             },
             {
-              "score": 4,
+              "score": 0,
             },
             {
-              "score": 4,
+              "score": 0,
             }
-		]
+		],
+		totalScore: 0
 	},
 	{
+		id: "1",
 		name: "jason",
-		score: [
+		courseScore: [
 			{
-              "score": 1,
+              "score": 0,
             },
             {
-              "score": 2,
+              "score": 0,
             },
             {
-              "score": 3,
+              "score": 0,
             },
             {
-              "score": 4,
+              "score": 0,
             },
             { 
-              "score": 5,
+              "score": 0,
             },
             {
-              "score": 6,
+              "score": 0,
             },
             {
-              "score": 6,
+              "score": 0,
             },
             {
-              "score": 8,
+              "score": 0,
             },
             {
-              "score": 9,
+              "score": 0,
             }
-		]
+		],
+		totalScore: 0
 	}
 ]
 

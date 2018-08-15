@@ -21,6 +21,15 @@ const SCOREDATA = [
 	}
 ]
 
+export function changeScore(updatedScore, holeNumber, userID) {
+  return {
+    type: 'FETCH_USER',
+    updatedScore,
+    holeNumber,
+    userID
+  }
+}
+
 export const fetchData = () => async dispatch => {
   DATAREF.on("value", snapshot => {
     dispatch({
