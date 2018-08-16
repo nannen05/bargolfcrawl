@@ -6,7 +6,7 @@ import reduxThunk from "redux-thunk";
 import rootReducer from "./store/reducers";
 //import { Router, Route } from 'react-router'
 //import { Router } from 'react-router'
-import { ConnectedRouter, routerMiddleware, connectRouter } from 'connected-react-router'
+//import { ConnectedRouter, routerMiddleware, connectRouter } from 'connected-react-router'
 import { BrowserRouter, Route, Router, Switch } from 'react-router-dom'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { createBrowserHistory } from 'history';
@@ -14,6 +14,7 @@ import { createBrowserHistory } from 'history';
 import App from "./App";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Course from "./components/Course";
 import Score from "./components/Score";
 import PlayerScore from "./components/PlayerScore";
 
@@ -42,6 +43,8 @@ render(
 		      </Route>
 		      <Route path="/signup" component={Signup}>
 		      </Route>
+          <Route path="/course" component={Course}>
+          </Route>
 		      <Route path="/scores" component={Score}>
 		      </Route>
 		      <Route path="/score/:player" component={PlayerScore}>

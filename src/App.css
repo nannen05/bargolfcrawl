@@ -48,9 +48,12 @@ input {
 color: #fff;
 }
 
-.App-login .btn {
+.App-login .btn > a,
+.btn > a {
     background: #5ED87C;
     width: 100%;
+    min-width: 220px;
+    display: block;
     text-transform: uppercase;
     max-width: 300px;
     padding: 10px 0px;
@@ -60,7 +63,7 @@ color: #fff;
     margin-bottom: 20px;
 }
 
-.App-login .btn:hover {
+.App-login .btn > a:hover {
     background: #39e664;
 }
 
@@ -74,12 +77,59 @@ a {
   color: #fff;
 }
 
-span { 
+span {
   color: #fff;
 }
 
 span.cap {
     text-transform: capitalize;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+
+
+.score:first-child,
+.player-score:first-child {
+    margin-top: 30px;
+}
+
+.player-score {
+  color: #fff;
+  margin: 0 0 20px;
+  font-size: 20px;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+  text-align: left;
+  min-width: 220px;
+}
+
+.player-score .right {
+    float:right;
+}
+
+.score p {
+  margin-right: 30px;
+}
+
+.score input {
+  margin-bottom: 0!important;
+  padding: 14px 8px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+
+.totalscore {
+    margin-bottom: 30px;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

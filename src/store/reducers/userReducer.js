@@ -6,7 +6,7 @@ const userData = (state = {}, action) => {
     case "FETCH_USER":
 	    console.log("Incrementing Likes!!");
 	    const i = action.userID;
-		const newUpdate = update(state[i].courseScore, {[action.holeNumber]: {score: {$set: parseInt(action.updatedScore, 10)}}});
+		const newUpdate = update(state[i].courseScore, {[action.holeNumber]: {score: {$set: (parseInt(action.updatedScore, 10) || 0) }}});
 		const newScore = update(state[i], {
 			courseScore: {$set: newUpdate}
 		})

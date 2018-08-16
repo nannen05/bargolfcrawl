@@ -56,7 +56,7 @@ class SingleScore extends Component  {
     }
 
     render() {
-        
+
         return (
            <div>
               <p>Par: <span>{this.props.data.par}</span></p>
@@ -73,7 +73,7 @@ class Score extends Component {
       this.getScore.bind(this)
       this.renderScores.bind(this)
   }
- 
+
   componentDidMount() {
       console.log(this.props)
       // let parScore = []
@@ -114,12 +114,12 @@ class Score extends Component {
   renderScores() {
       const scores = this.props.state.userData.map((value, index) => {
           console.log(value)
-          return <p key={index}><span className="cap">{value.name}</span> - Score: <span>{value.totalScore}</span></p>
+          return <p key={index} className="player-score"><span className="cap">{value.name}</span>  <span className="right">Score: {value.totalScore}</span></p>
       })
 
       return scores
   }
- 
+
   render() {
     let ScoreList = this.renderScores()
 

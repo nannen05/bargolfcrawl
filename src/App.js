@@ -27,6 +27,7 @@ class App extends Component {
             <div className="btn"><Link to="/scores"> Scores </Link></div>
             <div className="btn"><Link to="/score/nick"> Nick </Link></div>
             <div className="btn"><Link to="/score/jason"> Jason </Link></div>
+            <div className="btn"><Link to="/course"> Course </Link></div>
         </div>
       </div>
     );

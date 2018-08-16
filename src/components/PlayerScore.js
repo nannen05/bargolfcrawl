@@ -28,26 +28,29 @@ class SingleScore extends Component  {
 
     handleScoreChange(e) {
         let scoreValue = e.target.value
+        if(e.target.value == "") {
+            console.log("empty")
+        }
         if(e.target.value == this.props.par) {
-            console.log('par')
+            //console.log('par')
             scoreValue = e.target.value
         } else if (e.target.value < this.props.par) {
             if(e.target.value == this.props.par - 1) {
-                console.log('birdie')
+                //console.log('birdie')
                 scoreValue = e.target.value
             } else if (e.target.value == this.props.par - 2) {
-                console.log('eagle')
+                //console.log('eagle')
                 scoreValue = e.target.value
             } else if (e.target.value == this.props.par - 3) {
-                console.log('double eagle')
+                //console.log('double eagle')
                 scoreValue = e.target.value
             }
         } else if (e.target.value > this.props.par) {
             if(e.target.value == this.props.par + 1) {
-                console.log('bogey')
+                //console.log('bogey')
                 scoreValue = +e.target.value// + +1
             } else if (e.target.value == this.props.par + 2) {
-                console.log('double bogey')
+                //console.log('double bogey')
                 scoreValue = +e.target.value// + +2
             } else {
                 let higherScore = e.target.value - this.props.par
@@ -65,7 +68,7 @@ class SingleScore extends Component  {
 
     render() {
         return (
-           <div>
+           <div className="score">
               <p>Par: <span>{this.props.par}</span></p>
               <input type="text" placeholder={"Score for Hole " + this.props.id} id={this.props.id} value={this.state.score} onChange={e => this.handleScoreChange(e, this.props.id)}/>
            </div>
@@ -76,36 +79,36 @@ class SingleScore extends Component  {
 class Score extends Component {
   constructor(props) {
     super(); // or super(props) ?
-    
+
     this.state = {
           user: '',
           courseHoles: [
             {
-              "par": 4,
+              "par": 3,
             },
             {
               "par": 4,
             },
             {
-              "par": 5,
-            },
-            {
-              "par": 5,
-            },
-            { 
-              "par": 5,
+              "par": 3,
             },
             {
               "par": 5,
             },
             {
-              "par": 5,
+              "par": 3,
             },
             {
               "par": 5,
             },
             {
-              "par": 5,
+              "par": 4,
+            },
+            {
+              "par": 3,
+            },
+            {
+              "par": 4,
             }
           ],
           holes: "",
@@ -116,7 +119,7 @@ class Score extends Component {
       this.getScore.bind(this)
       this.getTotalScore.bind(this);
   }
- 
+
   componentDidMount() {
       let parScore = []
       const i = userData.findIndex((user) => user.name  === this.props.match.params.player);
@@ -161,10 +164,10 @@ class Score extends Component {
       // this.setState({
       //     totalScore: PlayerScore.reduce((a, b) => +a + +b)
       // }, () => {
-          
+
       // })
 
-      
+
       this.props.changeScore(value, index - 1, i)
   }
 
@@ -175,10 +178,10 @@ class Score extends Component {
       let Score = this.props.state.userData[i].courseScore.map((value, index) =>  {
           return <SingleScore data={value} par={this.state.courseHoles[index].par} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
       })
-      
+
       return Score
   }
- 
+
   render() {
     let ScoreList = this.renderScoreList()
     let totalScore = this.getTotalScore()
@@ -190,7 +193,7 @@ class Score extends Component {
         </div>
         <p>Course Par: {this.state.coursePar}</p>
         <div>{ScoreList}</div>
-        <div><span>Total Score: {totalScore}</span></div>
+        <div className="totalscore"><span>Total Score: {totalScore}</span></div>
         <div className="btn"><Link to="/"> Back </Link></div>
       </div>
     );
