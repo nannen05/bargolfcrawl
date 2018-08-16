@@ -12,11 +12,14 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { createBrowserHistory } from 'history';
 
 import App from "./App";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import Course from "./components/Course";
 import Score from "./components/Score";
 import PlayerScore from "./components/PlayerScore";
+import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
+
+//import Navagation from './components/Navagation'
 
 import { userData } from './data'
 import './index.css'
@@ -35,19 +38,20 @@ store.subscribe(() => console.log('Look ma, Redux!!'))
 
 render(
   <Provider store={store}>
+  	
     <BrowserRouter>
 	      <Switch>
 		      <Route exact path="/" component={App}>
 		      </Route>
-		      <Route path="/login" component={Login}>
+		      <Route path="/signin" component={SignIn}>
 		      </Route>
-		      <Route path="/signup" component={Signup}>
+		      <Route path="/signup" component={SignUp}>
 		      </Route>
-          <Route path="/course" component={Course}>
-          </Route>
+	          <Route path="/course" component={Course}>
+	          </Route>
 		      <Route path="/scores" component={Score}>
 		      </Route>
-		      <Route path="/score/:player" component={PlayerScore}>
+		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
 		      </Route>
 	      </Switch>
     </BrowserRouter>
