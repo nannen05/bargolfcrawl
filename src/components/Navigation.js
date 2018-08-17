@@ -14,7 +14,6 @@ const SignOutButton = () =>
 const Navigation = ({ authUser }) =>
   
   <div>
-  	{console.log(authUser)}
     { authUser
         ? <NavigationAuth id={authUser.uid} />
         : <NavigationNonAuth />

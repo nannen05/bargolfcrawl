@@ -169,6 +169,13 @@ span.cap {
     width: 300px;
 }
 
+.slick-dots li button::before {
+    color: #fff;
+}
+.slick-dots li.slick-active button:before {
+    color: #fff;
+}
+
 .slider .center {
     color: #fff;
     margin: 0 0 10px;
