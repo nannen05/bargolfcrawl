@@ -125,6 +125,20 @@ class Score extends Component {
       return scores
   }
 
+  renderSortedList(users) {
+      var sortable = [];
+      for (var i in users) {
+          sortable.push([i, users[i].SCORE.totalScore, users[i].username]);
+      }
+      const sortedList = sortable.sort(function(a, b) {
+          return a[1] - b[1];
+      })
+
+      return sortedList.map((value, index) => {
+          return <p key={index} className="player-score"><span className="cap">{value[2]}</span>  <span className="right">Score: {value[1]}</span></p>
+      })
+  }
+
   render() {
 
     console.log(this.state)
@@ -136,7 +150,7 @@ class Score extends Component {
         <div className="App-header">
           <h2>Player Scores</h2>
 
-          { !!users && <UserList users={users} /> }
+          { !!users && this.renderSortedList(users) }
 
           <div className="btn"><Link to="/"> Back </Link></div>
 
@@ -145,14 +159,6 @@ class Score extends Component {
     );
   }
 }
-
-const UserList = ({ users }) =>
-  <div>
-    {Object.keys(users).map(key =>
-      <p key={key} className="player-score"><span className="cap">{users[key].username}</span>  <span className="right">Score: {users[key].SCORE.totalScore}</span></p>
-    )}
-  </div>
-
 
 
 const mapStateToProps = (state) => {
