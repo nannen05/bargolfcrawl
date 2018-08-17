@@ -32,6 +32,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to End Of Summer (Bar) Golf Tournament</h2>
+          <h3>Coming Soon</h3>
         </div>
         {/* <p className="App-intro">
           To get started, login in using GMAIL and you will be able to update your score.
@@ -40,9 +41,7 @@ class App extends Component {
             <div className="btn"><Link to="/signin"> Sign In </Link></div>
             <div className="btn"><Link to="/signup"> Signup </Link></div>
             <div className="btn"><Link to="/scores"> Scores </Link></div>
-            <div className="btn"><Link to="/score/nick"> Nick </Link></div>
-            <div className="btn"><Link to="/score/jason"> Jason </Link></div>
-            <div className="btn"><Link to="/course"> Course </Link></div>
+            <div className="btn"><Link to="/course"> Course Rules </Link></div>
         </div>
       </div>
     );
@@ -57,5 +56,3 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps, actions)(App));
-
-//export default App

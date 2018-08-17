@@ -63,6 +63,16 @@ color: #fff;
     margin-bottom: 20px;
 }
 
+.App-login .btn.coming-soon > a,
+.btn.coming-soon > a {
+    background: rgba(94, 216, 124, 0.5)!important;
+    pointer-events: none;
+}
+
+.hide {
+    display: none!important;
+}
+
 .App-login .btn > a:hover {
     background: #39e664;
 }
