@@ -2,6 +2,8 @@ import { DATAREF } from '../../firebase'
 import { FETCH_DATA } from "./types";
 import { USERS } from '../../data'
 
+import { db } from '../../firebase'
+
 const SCOREDATA = [
 	{
 		"hole": 5,
@@ -37,6 +39,15 @@ export function updateTotalScore(uid, updatedTotalScore) {
     uid,
     updatedTotalScore
   }
+}
+
+export const fetchCourseRules = () => async dispatch => {
+	db.getCourseRules().then(snapshot =>
+      dispatch({
+			type: "FETCH_COURSERULES",
+			payload: snapshot.val()
+		})
+	)
 }
 
 // export const fetchData = () => async dispatch => {

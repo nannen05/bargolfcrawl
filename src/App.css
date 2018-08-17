@@ -132,6 +132,25 @@ span.cap {
     margin-bottom: 30px;
 }
 
+.slider {
+    max-width: 300px;
+    margin: 0 auto 30px;
+}
+
+.slick-slide {
+    width: 300px;
+}
+
+.slider .center {
+    color: #fff;
+    margin: 0 0 10px;
+    font-size: 20px;
+    padding-bottom: 5px;
+    min-width: 300px;
+    text-align: left;
+}
+
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #fff;
     opacity: 1; /* Firefox */

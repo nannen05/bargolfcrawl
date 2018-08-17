@@ -28,3 +28,6 @@ export const setScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
 export const getPlayerScore = (uid, updatedTotalScore) => {
 	db.ref('/users/' + uid + '/SCORE/').update({totalScore: updatedTotalScore})
 }
+
+export const getCourseRules = () => 
+	db.ref('/flamelink/environments/production/content/courseRules/en-US').once('value')

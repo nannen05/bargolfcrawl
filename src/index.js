@@ -25,7 +25,7 @@ import { userData } from './data'
 import './index.css'
 
 const defaultState = {
-  userData
+  userData,
 };
 
 const store = createStore(rootReducer, defaultState, applyMiddleware(reduxThunk));
