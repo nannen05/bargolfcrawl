@@ -13,7 +13,7 @@ import { createBrowserHistory } from 'history';
 
 import App from "./App";
 import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/Signup";
 import Course from "./components/Course";
 import Score from "./components/Score";
 import PlayerScore from "./components/PlayerScore";
