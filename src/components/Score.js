@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from 'react-router-dom'
 //import logo from './logo.svg';
 import '../App.css';
+import { db } from '../firebase'
 import * as actions from "../store/actions";
 import update from 'react-addons-update';
 
@@ -70,21 +71,20 @@ class Score extends Component {
   constructor(props) {
     super(); // or super(props) ?
 
-      this.getScore.bind(this)
-      this.renderScores.bind(this)
+    this.state = {
+      users: null,
+    };
+
+    this.getScore.bind(this)
+    this.renderScores.bind(this)
   }
 
   componentDidMount() {
-      console.log(this.props)
-      // let parScore = []
-      // this.state.score.map((value, index) => {
-      //     console.log(value)
-      //     parScore.push( value.par )
-      // })
-      // this.setState({
-      //     holes: this.state.score.length,
-      //     coursePar: parScore.reduce((a, b) => a + b)
-      // })
+    db.onceGetUsers().then(snapshot =>
+      this.setState({ users: snapshot.val() })
+    );
+
+    console.log(this.state)
   }
 
   getTotalScore() {
@@ -107,13 +107,18 @@ class Score extends Component {
       this.setState({
           totalScore: PlayerScore.reduce((a, b) => +a + +b)
       })
+  }
 
-      console.log(this.state.totalScore)
+  renderScoresDB() {
+      const scores = this.state.users.map((value, index) => {
+          return <p key={index} className="player-score"><span className="cap">{value.name}</span>  <span className="right">Score: {value.totalScore}</span></p>
+      })
+
+      return scores
   }
 
   renderScores() {
       const scores = this.props.state.userData.map((value, index) => {
-          console.log(value)
           return <p key={index} className="player-score"><span className="cap">{value.name}</span>  <span className="right">Score: {value.totalScore}</span></p>
       })
 
@@ -122,8 +127,13 @@ class Score extends Component {
 
   render() {
     let ScoreList = this.renderScores()
+    //let ScoreListDB = this.renderScoresDB()
+
+    console.log(this.state)
+    const { users } = this.state
 
     return (
+      
       <div className="App">
         <div className="App-header">
           <h2>Player Scores</h2>
@@ -131,11 +141,21 @@ class Score extends Component {
             {ScoreList}
           </div>
           <div className="btn"><Link to="/"> Back </Link></div>
+
+          { !!users && <UserList users={users} /> }
+
         </div>
       </div>
     );
   }
 }
+
+const UserList = ({ users }) =>
+  <div>
+    {Object.keys(users).map(key =>
+      <p key={key} className="player-score"><span className="cap">{users[key].username}</span>  <span className="right">Score: {users[key].SCORE.totalScore}</span></p>
+    )}
+  </div>
 
 
 
