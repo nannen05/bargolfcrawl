@@ -38,7 +38,6 @@ store.subscribe(() => console.log('Look ma, Redux!!'))
 
 render(
   <Provider store={store}>
-  	
     <BrowserRouter>
 	      <Switch>
 		      <Route exact path="/" component={App}>
