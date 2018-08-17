@@ -29,7 +29,7 @@ class SingleScore extends Component  {
 
     handleScoreChange(e) {
         let scoreValue = e.target.value
-        
+
         if(e.target.value == "") {
             console.log("empty")
         }
@@ -72,7 +72,11 @@ class SingleScore extends Component  {
         return (
            <div className="score">
               <p>Par: <span>{this.props.par}</span></p>
-              <input type="text" placeholder={"Score for Hole " + this.props.id} id={this.props.id} value={this.state.score} onChange={e => this.handleScoreChange(e, this.props.id)}/>
+              <input type="text" placeholder={"Score for Hole " + this.props.id}
+                     id={this.props.id}
+                     value={this.state.score}
+                     onChange={e => this.handleScoreChange(e, this.props.id)}
+                     onBlur={e => this.handleScoreChange(e, this.props.id)}/>
            </div>
         )
     }
@@ -115,12 +119,16 @@ class Score extends Component {
             }
           ],
           holes: "",
-          totalScore: 0,
+          totalScore: null,
           coursePar: 0
       }
 
       //this.getScore.bind(this)
       this.getTotalScore.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+      console.log(nextProps)
   }
 
   componentDidMount() {
@@ -154,7 +162,7 @@ class Score extends Component {
       this.state.user.SCORE.courseScore.map((value, index) => {
           PlayerScore.push( value.score )
       })
-     
+
       this.props.updateScore(this.state.userID, value, index - 1, PlayerScore.reduce((a, b) => +a + +b))
 
       //this.props.updateTotalScore(this.state.userID, PlayerScore.reduce((a, b) => +a + +b))

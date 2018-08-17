@@ -21,6 +21,7 @@ export const setScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
 	}).then(() => {
 		db.ref('/users/' + uid + '/SCORE/').update({totalScore: updatedTotalScore})
 	})
+  db.ref('/users/' + uid + '/SCORE/').update({totalScore: updatedTotalScore})
 
 }
 
