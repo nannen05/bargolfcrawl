@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 
 const SignOutButton = () =>
-  <button
+  <div className="btn signout"
     type="button"
     onClick={auth.doSignOut}
   >
     Sign Out
-  </button>
+  </div>
 
 
 const Navigation = ({ authUser }) =>
@@ -16,23 +16,38 @@ const Navigation = ({ authUser }) =>
   <div>
   	{console.log(authUser)}
     { authUser
-        ? <NavigationAuth />
+        ? <NavigationAuth id={authUser.uid} />
         : <NavigationNonAuth />
     }
   </div>
 
-const NavigationAuth = () =>
-  <ul>
-    <li><Link to={"/"}>Landing</Link></li>
-    <li><Link to={"/"}>Home</Link></li>
-    <li><Link to={"/"}>Account</Link></li>
-    <li><SignOutButton /></li>
-  </ul>
+class NavigationAuth extends Component {
+
+    render() {
+        const playerScoreLink = "/score/" + this.props.id
+
+        return(
+
+            <div className="App-login">
+              <div className="btn"><Link to={playerScoreLink}> Player Score </Link></div>
+              <div className="btn"><Link to="/scores"> Scores </Link></div>
+              <div className="btn"><Link to="/course"> Course Rules </Link></div>
+              <SignOutButton />
+            </div>
+        )
+    }
+}
+
 
 const NavigationNonAuth = () =>
-  <ul>
-    <li><Link to={"/"}>Landing</Link></li>
-    <li><Link to={"/signin"}>Sign In</Link></li>
-  </ul>
+  <div className="App-login">
+    <p className="App-intro">
+       To get started, Sign in or Sign up and you will be able to update your score.<br/><br/>
+    </p>
+    <div className="btn"><Link to="/signin"> Sign In </Link></div>
+    <div className="btn"><Link to="/signup"> Sign Up </Link></div>
+    <div className="btn"><Link to="/scores"> Scores </Link></div>
+    <div className="btn"><Link to="/course"> Course Rules </Link></div>
+  </div>
 
 export default Navigation;

@@ -49,18 +49,26 @@ color: #fff;
 }
 
 .App-login .btn > a,
-.btn > a {
+.btn > a,
+.btn.signout,
+form button {
     background: #5ED87C;
     width: 100%;
     min-width: 220px;
     display: block;
     text-transform: uppercase;
-    max-width: 300px;
+    width: 300px;
     padding: 10px 0px;
     color: #fff;
     transition:0.3s;
     cursor: pointer;
     margin-bottom: 20px;
+    border: none;
+    font-size: 16px;
+}
+
+form button:disabled {
+    background: #dddddd;
 }
 
 .App-login .btn.coming-soon > a,
@@ -75,6 +83,12 @@ color: #fff;
 
 .App-login .btn > a:hover {
     background: #39e664;
+}
+
+form input {
+    width: calc(100% - 20px);
+    display: block;
+    margin-bottom: 20px;
 }
 
 p {

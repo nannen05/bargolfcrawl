@@ -28,6 +28,7 @@ const defaultState = {
   userData,
 };
 
+
 const store = createStore(rootReducer, defaultState, applyMiddleware(reduxThunk));
 
 const history = syncHistoryWithStore(createBrowserHistory(), store);

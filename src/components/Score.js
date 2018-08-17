@@ -126,8 +126,6 @@ class Score extends Component {
   }
 
   render() {
-    let ScoreList = this.renderScores()
-    //let ScoreListDB = this.renderScoresDB()
 
     console.log(this.state)
     const { users } = this.state
@@ -137,12 +135,10 @@ class Score extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Player Scores</h2>
-          <div>
-            {ScoreList}
-          </div>
-          <div className="btn"><Link to="/"> Back </Link></div>
 
           { !!users && <UserList users={users} /> }
+
+          <div className="btn"><Link to="/"> Back </Link></div>
 
         </div>
       </div>

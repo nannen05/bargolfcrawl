@@ -66,7 +66,7 @@ class SignIn extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Signup</h2>
+          <h2>Sign In</h2>
         </div>
         <p className="App-intro">
           To get started, login in using GMAIL and you will be able to update your score.
@@ -91,6 +91,10 @@ class SignIn extends Component {
 
               { error && <p>{error.message}</p> }
             </form>
+            <div className="App-login">
+              <div className="btn"><Link to="/signup"> Sign Up </Link></div>
+              <div className="btn"><Link to="/"> Home </Link></div>
+            </div>
         </div>
       </div>
     );

@@ -29,7 +29,6 @@ class SignUp extends Component {
   }
 
   onSubmit = (e) => {
-
       const {
         username,
         email,
@@ -77,6 +76,13 @@ class SignUp extends Component {
 
     return (
       <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Sign up</h2>
+        </div>
+        <p className="App-intro">
+          Fill out all fields to signup<br/><br/>
+        </p>
         <form onSubmit={this.onSubmit}>
           <input
             value={username}
@@ -108,6 +114,10 @@ class SignUp extends Component {
 
           { error && <p>{error.message}</p> }
         </form>
+        <div className="App-login">
+          <div className="btn"><Link to="/signin"> Sign In </Link></div>
+          <div className="btn"><Link to="/"> Home </Link></div>
+        </div>
       </div>
     );
   }
