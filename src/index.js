@@ -14,12 +14,11 @@ import { createBrowserHistory } from 'history';
 import App from "./App";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
+import CreateGame from "./components/CreateGame"
+import GameList from "./components/GameList"
 import Course from "./components/Course";
 import Score from "./components/Score";
-import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
-
-//import Navagation from './components/Navagation'
 
 import { userData } from './data'
 import './index.css'
@@ -52,6 +51,10 @@ render(
 		      <Route path="/scores" component={Score}>
 		      </Route>
 		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
+		      </Route>
+		      <Route path="/creategame" component={CreateGame}>
+		      </Route>
+		      <Route path="/games/:player" component={GameList}>
 		      </Route>
 	      </Switch>
     </BrowserRouter>

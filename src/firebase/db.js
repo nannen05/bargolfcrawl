@@ -31,3 +31,7 @@ export const getPlayerScore = (uid, updatedTotalScore) => {
 
 export const getCourseRules = () => 
 	db.ref('/flamelink/environments/production/content/courseRules/en-US').once('value')
+
+export const addGame = (uid, courseRules) => {
+	db.ref('/users/' + uid + '/GAMES/').push(courseRules)
+}
