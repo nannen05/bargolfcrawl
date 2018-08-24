@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
 import Slider from "react-slick";
-import * as actions from "../store/actions";
-import { db, auth, firebase } from '../firebase'
-import '../App.css';
-import logo from '../logo.svg';
+import * as actions from "../../store/actions";
+import { db, auth, firebase } from '../../firebase'
+import '../../App.css';
+import logo from '../../logo.svg';
 
 console.log(auth)
 

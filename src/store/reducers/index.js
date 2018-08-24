@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 
 import data from "./dataReducer";
 import userData from "./userReducer";
+import userGames from "./userGameReducer";
 import updateScore from "./updateScoreReducer";
 import updateTotalScore from "./updateTotalScoreReducer";
 import courseRules  from "./courseRulesReducer";
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   data,
   courseRules,
   userData,
+  userGames,
   updateScore,
   updateTotalScore,
   routing: routerReducer

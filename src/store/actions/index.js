@@ -50,6 +50,29 @@ export const fetchCourseRules = () => async dispatch => {
 	)
 }
 
+export const fetchUserGames = (uid) => async dispatch => {
+	db.getUserGames(uid).then(snapshot => 
+	     dispatch(fetchUserGamesAsync(snapshot.val()))
+	)
+}
+
+function fetchUserGamesAsync(snapshot){  
+  return {
+    type: "FETCH_USERGAMES",
+    payload: snapshot
+  };
+}
+
+console.log(fetchUserGames)
+
+// export function fetchUserGames(uid) {
+// 	console.log("actioned")
+// 	return {
+// 		type: "FETCH_USERGAMES",
+// 		payload: uid
+// 	}
+// }
+
 // export const fetchData = () => async dispatch => {
 //   DATAREF.on("value", snapshot => {
 //     dispatch({

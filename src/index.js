@@ -14,8 +14,10 @@ import { createBrowserHistory } from 'history';
 import App from "./App";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
-import CreateGame from "./components/CreateGame"
-import GameList from "./components/GameList"
+import CreateGame from "./components/Games/CreateGame"
+import GameList from "./components/Games/GameList"
+import AddHole from "./components/Games/AddHole"
+import EditGame from "./components/Games/EditGame"
 import Course from "./components/Course";
 import Score from "./components/Score";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
@@ -55,6 +57,8 @@ render(
 		      <Route path="/creategame" component={CreateGame}>
 		      </Route>
 		      <Route path="/games/:player" component={GameList}>
+		      </Route>
+		      <Route path="/addhole/:player/:game" component={AddHole}>
 		      </Route>
 	      </Switch>
     </BrowserRouter>
