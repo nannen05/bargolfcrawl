@@ -16,17 +16,12 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
 import Course from "./components/Course";
 import Score from "./components/Score";
+import Profile from "./components/Profile";
 import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
-
-//import Navagation from './components/Navagation'
-
-import { userData } from './data'
 import './index.css'
 
-const defaultState = {
-  userData,
-};
+const defaultState = {};
 
 
 const store = createStore(rootReducer, defaultState, applyMiddleware(reduxThunk));
@@ -50,6 +45,8 @@ render(
 	          <Route path="/course" component={Course}>
 	          </Route>
 		      <Route path="/scores" component={Score}>
+		      </Route>
+			  <Route path="/profile" component={Profile}>
 		      </Route>
 		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
 		      </Route>

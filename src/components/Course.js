@@ -26,34 +26,34 @@ class RuleSlider extends React.Component {
     var settings = {
       dots: true,
       arrows: false,
+      fade: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      variableWidth: true
-      //centerMode: true,
-      //centerPadding: "5px"
+      variableWidth: true,
     };
 
     const { rules } = this.state
 
     return (
       <div>
-        
-        <Slider {...settings}>
-          {!!rules && Object.keys(rules).map(key =>
-            <div key={key} className="">
-              <div className="center"><span>Hole: </span>{rules[key].hole}</div>
-              <div className="center"><span>Time: </span>{rules[key].holeTime}</div>
-              <div className="center"><span>Bar: </span>{rules[key].bar}</div>
-              <div className="center"><span>Hole Par: </span>{rules[key].parScore}</div>
-              <div className="center"><span>Eagle: </span>{rules[key].eagle}</div>
-              <div className="center"><span>Birdie: </span>{rules[key].birdie}</div>
-              <div className="center"><span>Par: </span>{rules[key].par}</div>
-              <div className="center"><span>Bogey: </span>{rules[key].bogey}</div>
-            </div>
-          )}
-        </Slider>
+        {!!rules && 
+           <Slider {...settings}>
+              {Object.keys(rules).map(key =>
+                <div key={key} className="">
+                  <div className="center"><span>Hole: </span>{rules[key].hole}</div>
+                  <div className="center"><span>Time: </span>{rules[key].holeTime}</div>
+                  <div className="center"><span>Bar: </span>{rules[key].bar}</div>
+                  <div className="center"><span>Hole Par: </span>{rules[key].parScore}</div>
+                  <div className="center"><span>Eagle: </span>{rules[key].eagle}</div>
+                  <div className="center"><span>Birdie: </span>{rules[key].birdie}</div>
+                  <div className="center"><span>Par: </span>{rules[key].par}</div>
+                  <div className="center"><span>Bogey: </span>{rules[key].bogey}</div>
+                </div>
+              )}
+            </Slider>
+        }
       </div>
     );
   }
