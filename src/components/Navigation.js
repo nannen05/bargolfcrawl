@@ -31,6 +31,7 @@ class NavigationAuth extends Component {
               <div className="btn"><Link to={playerScoreLink}> Player Score </Link></div>
               <div className="btn"><Link to="/scores"> Scores </Link></div>
               <div className="btn"><Link to="/course"> Course Rules </Link></div>
+              <div className="btn"><Link to="/profile"> Profile </Link></div>
               <SignOutButton />
             </div>
         )
