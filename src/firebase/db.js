@@ -4,7 +4,8 @@ export const doCreateUser = (id, username, email, SCORE) =>
   db.ref(`users/${id}`).set({
     username,
     email,
-    SCORE
+		SCORE,
+		GAMES: [],
   });
 
 export const onceGetUsers = () =>
@@ -31,3 +32,34 @@ export const getPlayerScore = (uid, updatedTotalScore) => {
 
 export const getCourseRules = () => 
 	db.ref('/flamelink/environments/production/content/courseRules/en-US').once('value')
+
+export const getGames = () => 
+	db.ref('/flamelink/environments/production/content/games/en-US').once('value')
+
+export const getGame = (uid) => {
+		return db.ref(`/flamelink/environments/production/content/games/en-US/${uid}`).once('value')
+}
+
+export const setGameUser = (gameID, userID) => {
+	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+		.then(snapshot => {
+
+			let gameUsers = snapshot.val().gameUsers
+
+			if(!gameUsers)
+				return db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( userID )
+
+			Object.keys(gameUsers).map(key => {
+					if(!gameUsers[key] == userID) {
+						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( userID )
+					}
+			})
+		})
+}
+
+// export const setGameUserScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
+// 	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+// 		.then(snapshot => {
+
+// 		})
+// }

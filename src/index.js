@@ -7,7 +7,7 @@ import rootReducer from "./store/reducers";
 //import { Router, Route } from 'react-router'
 //import { Router } from 'react-router'
 //import { ConnectedRouter, routerMiddleware, connectRouter } from 'connected-react-router'
-import { BrowserRouter, Route, Router, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Router, Switch, withRouter } from 'react-router-dom'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { createBrowserHistory } from 'history';
 
@@ -16,6 +16,9 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
 import Course from "./components/Course";
 import Score from "./components/Score";
+import Game from "./components/Game";
+import GameScore from "./components/GameScore";
+import Games from "./components/Games";
 import Profile from "./components/Profile";
 import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
@@ -45,9 +48,13 @@ render(
 	          <Route path="/course" component={Course}>
 	          </Route>
 		      <Route path="/scores" component={Score}>
-		      </Route>
-			  <Route path="/profile" component={Profile}>
-		      </Route>
+			  </Route> 
+			  <Route path="/games" component={Games}>
+			  </Route>
+			  <Route exact path="/game/:game" component={Game}>
+			  </Route>
+			  <Route exact path="/game/:game/score/:player" component={GameScore}>
+		      </Route> 
 		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
 		      </Route>
 	      </Switch>
