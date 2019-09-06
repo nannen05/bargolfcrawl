@@ -88,7 +88,7 @@ export const getGamePlayerScore = async (gameID, userID) => {
 		return await score
 }
 
-// export const setGameUserScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
+// export const setGamePlayerScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
 // 	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
 // 		.then(snapshot => {
 

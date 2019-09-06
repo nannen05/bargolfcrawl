@@ -10,22 +10,81 @@ import FixedNavagationBottom from './FixedNavagationBottom';
 
 import '../App.css';
 import '../css/flat-ui.css';
-import { async } from '@firebase/util';
+//import { async } from '@firebase/util';
+//import updatedScore from '../store/reducers/updateScoreReducer';
 
 class GameScoreSingle extends Component {
     constructor(props) {
         super();
 
         this.state = {
-
+            score: props.data.score,
+            calculatedScore: '',
         }
+
+        this.handleScoreChange.bind(this);
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            score: nextProps.data.score
+        })
+    }
+
+    handleScoreChange(e) {
+        let scoreValue = e.target.value
+
+        if(e.target.value == "") {
+            console.log("empty")
+        }
+        if(e.target.value == this.props.par) {
+            //console.log('par')
+            scoreValue = e.target.value
+        } else if (e.target.value < this.props.par) {
+            if(e.target.value == this.props.par - 1) {
+                //console.log('birdie')
+                scoreValue = e.target.value
+            } else if (e.target.value == this.props.par - 2) {
+                //console.log('eagle')
+                scoreValue = e.target.value
+            } else if (e.target.value == this.props.par - 3) {
+                //console.log('double eagle')
+                scoreValue = e.target.value
+            }
+        } else if (e.target.value > this.props.par) {
+            if(e.target.value == this.props.par + 1) {
+                //console.log('bogey')
+                scoreValue = +e.target.value// + +1
+            } else if (e.target.value == this.props.par + 2) {
+                //console.log('double bogey')
+                scoreValue = +e.target.value// + +2
+            } else {
+                let higherScore = e.target.value - this.props.par
+                scoreValue = +e.target.value// + +higherScore
+            }
+        }
+        this.setState({
+            score: scoreValue,
+            calculatedScore: scoreValue
+
+        }, () => {
+            this.props.getScoreChange(this.state.score, this.props.id);
+        })
+    }
+
 
     render() {
         return (
             <div className="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="text" value="" placeholder="Inactive" className="form-control"/>
+                <label for="exampleInputEmail1">{`Hole Number ${this.props.id}`}</label>
+                <input
+                    id={this.props.id} 
+                    type="text" 
+                    value={this.state.score}
+                    onChange={e => this.handleScoreChange(e, this.props.id)}
+                    onBlur={e => this.handleScoreChange(e, this.props.id)}
+                    placeholder="Inactive" 
+                    className="form-control"/>
             </div>
         )
     }
@@ -78,10 +137,32 @@ class GameScore extends Component {
         this.createBottomNav()
     }
 
+    getScore(value, index) {
+
+        let PlayerScore = []
+        this.state.score.currentScore.map((value, index) => {
+            PlayerScore.push( value.score )
+        })
+
+        let updatedScore = PlayerScore.reduce((a, b) => +a + +b)
+        
+        console.log(PlayerScore, 'player')
+        console.log('user', this.state.userID)
+        console.log('value', value)
+        console.log('hole', index)
+        console.log('updatedScore', updatedScore)
+  
+        //this.props.updateScore(this.state.userID, value, index - 1, updatedScore)
+        
+        //db.setGamePlayerScore(action.uid, action.updatedScore, action.holeNumber, action.updatedTotalScore)
+
+        //this.props.updateTotalScore(this.state.userID, PlayerScore.reduce((a, b) => +a + +b))
+    }
+
     createScoreList() {
         let ScoreList = this.state.score.currentScore.map((value, index) =>  {
             //return <SingleScore data={value} par={this.state.courseHoles[index].par} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
-            return <GameScoreSingle key={index}/>
+            return <GameScoreSingle data={value} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
         })
   
         return ScoreList
@@ -138,14 +219,7 @@ class GameScore extends Component {
                         ) : (
                             this.createScoreList()
                         )}
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" value="" placeholder="Inactive" className="form-control"/>
-                        </div>
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" value="" placeholder="Inactive" className="form-control"/>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
