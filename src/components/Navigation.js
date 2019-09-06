@@ -28,6 +28,7 @@ class NavigationAuth extends Component {
         return(
 
             <div className="App-login">
+              <div className="btn"><Link to="/games"> Games </Link></div>
               <div className="btn"><Link to={playerScoreLink}> Player Score </Link></div>
               <div className="btn"><Link to="/scores"> Scores </Link></div>
               <div className="btn"><Link to="/course"> Course Rules </Link></div>

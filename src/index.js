@@ -18,6 +18,7 @@ import Course from "./components/Course";
 import Score from "./components/Score";
 import Game from "./components/Game";
 import GameScore from "./components/GameScore";
+import GameChat from "./components/GameChat";
 import Games from "./components/Games";
 import Profile from "./components/Profile";
 import PlayerScore from "./components/PlayerScore";
@@ -54,6 +55,8 @@ render(
 			  <Route exact path="/game/:game" component={Game}>
 			  </Route>
 			  <Route exact path="/game/:game/score/:player" component={GameScore}>
+			  </Route> 
+			  <Route exact path="/game/:game/chat" component={GameChat}>
 		      </Route> 
 		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
 		      </Route>

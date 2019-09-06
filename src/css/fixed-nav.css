@@ -1,0 +1,27 @@
+.fixed-nav-bottom {
+    position: fixed;
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 360px;
+    width: 100%;
+    background: #d6dbdf;
+    padding: 10px 0;
+}
+
+.fixed-nav-bottom:after {
+    content: "";
+    background: #d6dbdf;
+    position: absolute;
+    left: -100vw;
+    width: 200vw;
+    height: calc(100% + 20px);
+    z-index: -1;
+    bottom: -20px;
+}
+
+.fixed-nav-bottom p {
+    margin: 10px 0 10px;
+    text-transform: uppercase;
+}

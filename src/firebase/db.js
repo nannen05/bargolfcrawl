@@ -1,4 +1,5 @@
 import { db } from './firebase';
+import { async } from '@firebase/util';
 
 export const doCreateUser = (id, username, email, SCORE) =>
   db.ref(`users/${id}`).set({
@@ -41,20 +42,50 @@ export const getGame = (uid) => {
 }
 
 export const setGameUser = (gameID, userID) => {
+
+	const currentScore = []
+	for (let index = 0; index < 18; index++) {
+		currentScore.push({ score: 0 })
+	}
+	const SCORE = {
+			currentScore,
+			totalScore: 0
+	}
+
 	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
 		.then(snapshot => {
 
 			let gameUsers = snapshot.val().gameUsers
 
 			if(!gameUsers)
-				return db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( userID )
+				return db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( { userID, SCORE } )
 
 			Object.keys(gameUsers).map(key => {
-					if(!gameUsers[key] == userID) {
-						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( userID )
+					if(!gameUsers[key].userID == userID) {
+						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( { userID, SCORE } )
 					}
 			})
 		})
+}
+
+export const getGamePlayerScore = async (gameID, userID) => {
+	let score = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+		.then(snapshot => {
+			let gameUsers = snapshot.val().gameUsers
+			if(!gameUsers)
+				return 
+
+				Object.keys(gameUsers).map(key => {
+					if(gameUsers[key].userID == userID) {
+						//console.log(gameUsers[key])
+						return score = gameUsers[key].SCORE
+					}
+				})
+
+				return score
+		})
+
+		return await score
 }
 
 // export const setGameUserScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
