@@ -29,6 +29,8 @@ class GameScoreSingle extends Component {
         this.setState({
             score: nextProps.data.score
         })
+
+        console.log(this.state, 'stateScore')
     }
 
     handleScoreChange(e) {
@@ -78,12 +80,12 @@ class GameScoreSingle extends Component {
             <div className="form-group">
                 <label for="exampleInputEmail1">{`Hole Number ${this.props.id}`}</label>
                 <input
-                    id={this.props.id} 
-                    type="text" 
+                    id={this.props.id}  
                     value={this.state.score}
                     onChange={e => this.handleScoreChange(e, this.props.id)}
                     onBlur={e => this.handleScoreChange(e, this.props.id)}
-                    placeholder="Inactive" 
+                    placeholder={"Score for Hole " + this.props.id}
+                    type="text"
                     className="form-control"/>
             </div>
         )
@@ -138,7 +140,8 @@ class GameScore extends Component {
     }
 
     getScore(value, index) {
-
+        const { userID } = this.state
+        const { game } = this.props.match.params
         let PlayerScore = []
         this.state.score.currentScore.map((value, index) => {
             PlayerScore.push( value.score )
@@ -147,16 +150,15 @@ class GameScore extends Component {
         let updatedScore = PlayerScore.reduce((a, b) => +a + +b)
         
         console.log(PlayerScore, 'player')
-        console.log('user', this.state.userID)
-        console.log('value', value)
-        console.log('hole', index)
-        console.log('updatedScore', updatedScore)
+        // console.log('user', this.state.userID)
+        // console.log('value', value - 1)
+        // console.log('hole', index)
+        //console.log('updatedScore', updatedScore)
+        //console.log(this.state.score.currentScore)
   
         //this.props.updateScore(this.state.userID, value, index - 1, updatedScore)
         
-        //db.setGamePlayerScore(action.uid, action.updatedScore, action.holeNumber, action.updatedTotalScore)
-
-        //this.props.updateTotalScore(this.state.userID, PlayerScore.reduce((a, b) => +a + +b))
+        db.setGamePlayerScore(userID, game, value, index - 1, updatedScore)
     }
 
     createScoreList() {

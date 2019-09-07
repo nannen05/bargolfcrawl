@@ -88,9 +88,24 @@ export const getGamePlayerScore = async (gameID, userID) => {
 		return await score
 }
 
-// export const setGamePlayerScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
-// 	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
-// 		.then(snapshot => {
+export const setGamePlayerScore = (userID, gameID, updatedScore, holeNumber, updatedTotalScore) => {
+	db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+		.then(snapshot => {
+				console.log(snapshot.val())
+				let gameUsers = snapshot.val().gameUsers
+				if(!gameUsers)
+					return 
 
-// 		})
-// }
+				Object.keys(gameUsers).map((key, index) => {
+					if(gameUsers[key].userID == userID) {
+						let userKey = Object.keys(gameUsers)[index]
+						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userKey}/SCORE/currentScore/${holeNumber}`).set({
+							score: (parseInt(updatedScore, 10) || 0)
+						}).then(() => {
+							db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userKey}/SCORE/`).update({totalScore: updatedTotalScore})
+						})
+						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userKey}/SCORE/`).update({totalScore: updatedTotalScore})
+					}
+				})
+		})
+}
