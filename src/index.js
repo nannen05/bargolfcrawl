@@ -17,13 +17,15 @@ import SignUp from "./components/Signup";
 import Course from "./components/Course";
 import Score from "./components/Score";
 import Game from "./components/Game";
-import GameScore from "./components/GameScore";
-import GameChat from "./components/GameChat";
 import Games from "./components/Games";
+import GameScore from "./components/GameScore";
+import GameScores from "./components/GameScores";
+import GameChat from "./components/GameChat";
 import Profile from "./components/Profile";
 import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
 import './index.css'
+
 
 const defaultState = {};
 
@@ -55,6 +57,8 @@ render(
 			  <Route exact path="/game/:game" component={Game}>
 			  </Route>
 			  <Route exact path="/game/:game/score/:player" component={GameScore}>
+			  </Route> 
+			  <Route exact path="/game/:game/scores" component={GameScores}>
 			  </Route> 
 			  <Route exact path="/game/:game/chat" component={GameChat}>
 		      </Route> 

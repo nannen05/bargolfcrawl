@@ -71,13 +71,16 @@ class Game extends Component {
                         <div className="col">
                             <h4 className="tile-title">Game</h4>
                             <h3 className="tile-title">{game.gameName}</h3>
-                            <div>
+                            <div className="btn btn-block btn-lg btn-primary">
                                 <Link to={`/game/${this.state.game.id}/score/${this.state.authUser.uid}`}>Edit Score</Link>
                             </div>
-                            <div>
-                                <Link to={`/game/${this.state.game.id}/scores`}>View Scores</Link>
+                            <div className="btn btn-block btn-lg btn-primary">
+                                <Link to={`/game/${this.state.game.id}/scores`}>Scores</Link>
                             </div>
-                            <div>
+                            <div className="btn btn-block btn-lg btn-primary">
+                                <Link to={`/game/${this.state.game.id}/courserules`}>Course Rules</Link>
+                            </div>
+                            <div className="btn btn-block btn-lg btn-default disabled">
                                 <Link to={`/game/${this.state.game.id}/chat`}>Chat</Link>
                             </div>
                         </div>

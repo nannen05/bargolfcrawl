@@ -10,8 +10,6 @@ import FixedNavagationBottom from './FixedNavagationBottom';
 
 import '../App.css';
 import '../css/flat-ui.css';
-//import { async } from '@firebase/util';
-//import updatedScore from '../store/reducers/updateScoreReducer';
 
 class GameScoreSingle extends Component {
     constructor(props) {
@@ -29,8 +27,6 @@ class GameScoreSingle extends Component {
         this.setState({
             score: nextProps.data.score
         })
-
-        console.log(this.state, 'stateScore')
     }
 
     handleScoreChange(e) {
@@ -79,6 +75,7 @@ class GameScoreSingle extends Component {
         return (
             <div className="form-group">
                 <label for="exampleInputEmail1">{`Hole Number ${this.props.id}`}</label>
+                <label className="login-field-icon fui-question-circle" for="login-name"></label>
                 <input
                     id={this.props.id}  
                     value={this.state.score}
@@ -109,6 +106,8 @@ class GameScore extends Component {
             authUser: null,
             navLinks: []
         }
+
+        this.getTotalScore.bind(this);
     }
 
     async componentDidMount() {
@@ -139,31 +138,45 @@ class GameScore extends Component {
         this.createBottomNav()
     }
 
+    getTotalScore() {
+        return this.state.score.currentScore.totalScore 
+    }
+
     getScore(value, index) {
         const { userID } = this.state
         const { game } = this.props.match.params
+
+        db.setGamePlayerScore(userID, game, value, index - 1, this.getCurrentScore(value, index - 1 ))
+            .then(res => {
+                this.setState(prevState => {
+                    if(value != undefined) {
+                        const currentScore = [...prevState.score.currentScore];
+
+                        currentScore[index - 1].score = (parseInt(value, 10) || 0)
+
+                        const score = {
+                            currentScore: currentScore, 
+                            totalScore: this.getCurrentScore(value, index - 1)
+                        }
+                        return { score };
+                    }
+                  })
+            })
+    }
+
+    getCurrentScore(value, index) {
         let PlayerScore = []
         this.state.score.currentScore.map((value, index) => {
-            PlayerScore.push( value.score )
+            PlayerScore.push( (parseInt(value.score, 10) || 0) )
         })
 
-        let updatedScore = PlayerScore.reduce((a, b) => +a + +b)
-        
-        console.log(PlayerScore, 'player')
-        // console.log('user', this.state.userID)
-        // console.log('value', value - 1)
-        // console.log('hole', index)
-        //console.log('updatedScore', updatedScore)
-        //console.log(this.state.score.currentScore)
-  
-        //this.props.updateScore(this.state.userID, value, index - 1, updatedScore)
-        
-        db.setGamePlayerScore(userID, game, value, index - 1, updatedScore)
+        PlayerScore.splice(index, 1, (parseInt(value, 10) || 0))
+
+        return PlayerScore.reduce((a, b) => +a + +b)
     }
 
     createScoreList() {
         let ScoreList = this.state.score.currentScore.map((value, index) =>  {
-            //return <SingleScore data={value} par={this.state.courseHoles[index].par} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
             return <GameScoreSingle data={value} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
         })
   
@@ -215,8 +228,9 @@ class GameScore extends Component {
                         <h4 className="tile-title">Scorecard</h4>
                         <h3 className="tile-title">{ !!user && user.username }</h3>
                         <h4 className="tile-title">{ !!coursePar && `Course Par: ${coursePar}` }</h4>
+                        <h4 className="tile-title">{ !!score && `Current Score: ${score.totalScore}` }</h4>
                         
-                        {this.state.score.currentScore === 0 ? (
+                        {score.currentScore.length === 0 ? (
                             <div>Loading...</div>
                         ) : (
                             this.createScoreList()
@@ -232,8 +246,6 @@ class GameScore extends Component {
         );
       }
 }
-
-
 
 const mapStateToProps = ({ gameScore }) => {
   return {

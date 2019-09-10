@@ -43,8 +43,20 @@ h4 {
     margin-bottom: -10px!important;
 }
 
+.btn-block {
+    margin-bottom: 20px;
+}
+
 [class^="fui-"], [class*="fui-"] {
     font-size: 28px;
+}
+
+.login-field-icon {
+    position: absolute;
+    right: 24px;
+    width: 28px;
+    top: 36px;
+    font-size: 20px;
 }
 
 .App-logo {
@@ -89,19 +101,19 @@ color: #fff;
 .btn > a,
 .btn.signout,
 form button {
-    background: #5ED87C;
+    /* background: #5ED87C; */
     width: 100%;
     min-width: 220px;
-    display: block;
+    /* display: block; */
     text-transform: uppercase;
     width: 300px;
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     color: #fff;
     transition:0.3s;
     cursor: pointer;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px;
     border: none;
-    font-size: 16px;
+    font-size: 16px; */
 }
 
 form {
@@ -167,11 +179,19 @@ span.cap {
 .player-score {
   color: #fff;
   margin: 0 0 20px;
-  font-size: 20px;
-  border-bottom: 1px solid #fff;
+  font-size: 20px!important;
+  border-bottom: 1px solid #34495e;
   padding-bottom: 5px;
   text-align: left;
   min-width: 220px;
+}
+
+.player-score {
+    font-size: 20px;
+}
+
+.player-score span {
+    color: #34495e;
 }
 
 .player-score .right {
