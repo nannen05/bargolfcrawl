@@ -34,8 +34,6 @@ class GameScoreSingle extends Component {
 
         let scoreResult = ''
 
-        console.log
-
         if(score == 0) {
             scoreResult = 'Enter A Score'
         }
@@ -46,8 +44,8 @@ class GameScoreSingle extends Component {
                 scoreResult = 'Birdie'
             } else if (score == par - 2) {
                 scoreResult = 'Eagle'
-            } else if (score == par - 3) {
-                scoreResult = 'Double Eagle'
+            } else if (score == par - 3 && score == 0) {
+                scoreResult = 'Enter A Score'
             }
         } else if (score > par) {
             if(score == par + 1) {
@@ -69,45 +67,33 @@ class GameScoreSingle extends Component {
         let scoreValue = e
 
         if(e.target) {
-            scoreValue = e.target.value
+            e = e.target.value
+            scoreValue = e
         }
 
         let scoreResult = ''
 
-        if(e == "") {
+        if(e === "") {
             console.log("empty")
             scoreResult = ''
         }
         if(e == this.props.par) {
-            //console.log('par')
-            //scoreValue = e
             scoreResult = 'Par'
         } else if (e < this.props.par) {
             if(e == this.props.par - 1) {
-                //console.log('birdie')
-                //scoreValue = e
                 scoreResult = 'Birdie'
             } else if (e == this.props.par - 2) {
-                //console.log('eagle')
-                //scoreValue = e
                 scoreResult = 'Eagle'
             } else if (e == this.props.par - 3) {
-                //console.log('double eagle')
-                //scoreValue = e
-                scoreValue = 'Double Eagle'
+                scoreResult = 'Enter A Score'
             }
         } else if (e > this.props.par) {
-            if(e == this.props.par + 1) {
-                //console.log('bogey')
-                scoreValue = 'Bogey'
-                //scoreValue = +e// + +1
+            if(e == this.props.par + 1) {  
+                scoreResult = 'Bogey'
             } else if (e == this.props.par + 2) {
-                //console.log('double bogey')
-                scoreValue = 'Double Bogey'
-                //scoreValue = +e// + +2
+                scoreResult = 'Double Bogey'
             } else {
-                //let higherScore = e.target.value - this.props.par
-                //scoreValue = +e// + +higherScore
+                scoreResult = 'Try Again'
             }
         }
         this.setState({
@@ -124,7 +110,7 @@ class GameScoreSingle extends Component {
     render() {
         const { score, scoreResult } = this.state
         return (
-            <div className="form-group">
+            <div className="form-group form-group-score">
                 <label className="label-number" for="exampleInputEmail1"><span>{this.props.id}</span><span className="label-number-text">Hole</span></label>
                 <label className="login-field-icon fui-question-circle"></label>
                 <label className="label-result">
@@ -132,7 +118,7 @@ class GameScoreSingle extends Component {
                         {(scoreResult === 0 ) ? (
                             'Enter A Score'
                         ) : (
-                            {scoreResult}
+                            scoreResult
                         )}
                     </span>
                 </label>

@@ -61,17 +61,18 @@
     text-transform: uppercase;
 }
 
-.form-control {
+.form-group-score .form-control {
     /* width: 80%; */
     height: 32px!important;
     border: none!important;
     position: relative!important;
-    padding-left: 90px!important;
     padding-top: 14px!important;
     margin-bottom: 0!important;
     padding-bottom: 14px!important;
     font-weight: 600!important;
     font-size: 20px!important;
+    padding-right: 50px!important;
+    max-width: 100px;
 }   
 
 .form-group.form-group-header {
@@ -165,6 +166,19 @@
     color: #34495e;
     display: block;
     line-height: 30px;
+}
+
+.label-result {
+    position: absolute;
+    right: 40px;
+    max-width: 100px;
+    text-align: center;
+    top: 12px;
+}
+
+.label-result span {
+    font-weight: 600;
+    color: #34495e;
 }
 
 label { 
