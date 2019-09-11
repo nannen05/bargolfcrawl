@@ -123,3 +123,16 @@ export const setGamePlayerScore = async (userID, gameID, updatedScore, holeNumbe
 			return snapshot
 		})
 }
+
+export const getGameRules = (gameID) => {
+	let rules = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+	.then(snapshot => {
+			let gameRules = snapshot.val().gameRules
+			if(!gameRules)
+				return 
+
+			return gameRules
+	})
+	
+	return rules
+}

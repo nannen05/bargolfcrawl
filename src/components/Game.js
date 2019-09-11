@@ -5,7 +5,8 @@ import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
-import FixedNavagationBottom from './FixedNavagationBottom';
+import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom';
 
 import '../App.css';
 import '../css/flat-ui.css';
@@ -32,17 +33,29 @@ class Game extends Component {
                         icon: 'fui-home',
                     },
                     {
+                        name: 'Scores',
+                        link: `/game/${this.props.match.params.game}/scores/`, 
+                        //link: `/game/${this.props.match.params.game}/score/`, 
+                        icon: 'fui-document',
+                    },
+                    {
                         name: 'Score',
                         link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
                         //link: `/game/${this.props.match.params.game}/score/`, 
                         icon: 'fui-new',
                     },
                     {
-                        name: 'Chat',
-                        link: `/game/${this.props.match.params.game}/chat`, 
+                        name: 'Rules',
+                        link: `/game/${this.props.match.params.game}/courserules`, 
                         //link: `/game/${this.props.match.params.game}/score/`, 
-                        icon: 'fui-chat',
+                        icon: 'fui-question-circle',
                     },
+                    // {
+                    //     name: 'Chat',
+                    //     link: `/game/${this.props.match.params.game}/chat`, 
+                    //     //link: `/game/${this.props.match.params.game}/score/`, 
+                    //     icon: 'fui-chat',
+                    // },
                     {
                         name: 'Back',
                         link: `/games`,
@@ -64,31 +77,44 @@ class Game extends Component {
         const { game, authUser } = this.state
     
         return (
-          <div className="App">
+          <div className="App center">
               {(!!game && !!authUser) && 
                 <div className="container">
-                    <div className="row tile">
+                    <div className="row tile-header">
                         <div className="col">
-                            <h4 className="tile-title">Game</h4>
                             <h3 className="tile-title">{game.gameName}</h3>
-                            <div className="btn btn-block btn-lg btn-primary">
-                                <Link to={`/game/${this.state.game.id}/score/${this.state.authUser.uid}`}>Edit Score</Link>
-                            </div>
-                            <div className="btn btn-block btn-lg btn-primary">
-                                <Link to={`/game/${this.state.game.id}/scores`}>Scores</Link>
-                            </div>
-                            <div className="btn btn-block btn-lg btn-primary">
-                                <Link to={`/game/${this.state.game.id}/courserules`}>Course Rules</Link>
-                            </div>
-                            <div className="btn btn-block btn-lg btn-default disabled">
-                                <Link to={`/game/${this.state.game.id}/chat`}>Chat</Link>
-                            </div>
+                            {!!this.state.navLinks && 
+                                <NavagationTop links={this.state.navLinks} />
+                            }
                         </div>
                     </div>
+                    { 
+                    // <div className="row tile">
+                    //     <div className="col">
+                    //         <h4 className="tile-title">Game</h4>
+                    //         <h3 className="tile-title">{game.gameName}</h3>
+                    //         <div className="btn btn-block btn-lg btn-primary">
+                    //             <Link to={`/game/${this.state.game.id}/score/${this.state.authUser.uid}`}>Edit Score</Link>
+                    //         </div>
+                    //         <div className="btn btn-block btn-lg btn-primary">
+                    //             <Link to={`/game/${this.state.game.id}/scores`}>Scores</Link>
+                    //         </div>
+                    //         <div className="btn btn-block btn-lg btn-primary">
+                    //             <Link to={`/game/${this.state.game.id}/courserules`}>Course Rules</Link>
+                    //         </div>
+                    //         {
+                    //         <div className="btn btn-block btn-lg btn-default disabled">
+                    //             <Link to={`/game/${this.state.game.id}/chat`}>Chat</Link>
+                    //         </div>
+                    //         }
+                    //     </div>
+                    // </div>
+                    }
                 </div>
               }
-              {!!this.state.navLinks && 
-                <FixedNavagationBottom links={this.state.navLinks} />
+              {
+                //!!this.state.navLinks && 
+                //<NavagationBottom links={this.state.navLinks} />
               }
           </div>
         );

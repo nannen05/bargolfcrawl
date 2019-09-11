@@ -18,6 +18,7 @@ import Course from "./components/Course";
 import Score from "./components/Score";
 import Game from "./components/Game";
 import Games from "./components/Games";
+import GameRules from "./components/GameRules";
 import GameScore from "./components/GameScore";
 import GameScores from "./components/GameScores";
 import GameChat from "./components/GameChat";
@@ -25,7 +26,6 @@ import Profile from "./components/Profile";
 import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
 import './index.css'
-
 
 const defaultState = {};
 
@@ -59,7 +59,9 @@ render(
 			  <Route exact path="/game/:game/score/:player" component={GameScore}>
 			  </Route> 
 			  <Route exact path="/game/:game/scores" component={GameScores}>
-			  </Route> 
+			  </Route>
+			  <Route exact path="/game/:game/courserules" component={GameRules}>
+			  </Route>  
 			  <Route exact path="/game/:game/chat" component={GameChat}>
 		      </Route> 
 		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>

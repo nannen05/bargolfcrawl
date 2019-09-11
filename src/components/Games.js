@@ -4,15 +4,20 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db } from '../firebase'
+
+import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom'
+
 import '../App.css';
-import logo from '../logo.svg';
+import '../css/flat-ui.css';
 
 class Games extends Component {
     constructor(props) {
         super();
 
         this.state = {
-            games: null
+            games: null,
+            navLinks: [],
         }
     }
 
@@ -21,41 +26,73 @@ class Games extends Component {
         db.getGames().then(snapshot =>
             this.setState({ games: snapshot.val() })
         );
+
+        this.setState({
+          navLinks: [
+              {
+                  name: 'Home',
+                  link: '/',
+                  icon: 'fui-home',
+              }
+          ],
+      })
+    }
+
+    createGameStartDate(dateUTC) {
+      let date = new Date(dateUTC); 
+      return date.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+    }
+
+    createGameTimeDate(dateUTC) {
+      let date = new Date(dateUTC);
+      return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
     }
 
     render() {
         var settings = {
           dots: true,
           arrows: false,
-          fade: true,
+          //fade: true,
           infinite: true,
           speed: 500,
           slidesToShow: 1,
           slidesToScroll: 1,
           variableWidth: true,
+          centerMode: true,
+          //centerPadding: 40,
         };
     
         const { games } = this.state
     
         return (
           <div className="App">
-            <div className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h2>Gamess</h2>
-            </div>
-            <div className="slider">
-            {!!games && 
-                <Slider {...settings}>
-                  {Object.keys(games).map(key =>
-                    <div key={key} className="">
-                      <div className="center"><span>Name: </span>{games[key].gameName}</div>
-                      <div className="center"><span>Date: </span>{games[key].gameDate}</div>
-                      <div className="center"><span>Start Time: </span>{games[key].gameStartTime}</div>
-                      <div className="center"><Link to={`/game/${games[key].id}`}> Join Game </Link></div>
-                    </div>
-                  )}
-                </Slider>
-            }
+            <div className="container">
+              <div className="row tile-header">
+                  <div className="col">
+                      <h3 className="tile-title">Games</h3>
+                      {!!this.state.navLinks && 
+                          <NavagationTop links={this.state.navLinks} />
+                      }
+                  </div>
+              </div>
+              <div className="row tile">
+                <div className="slider">
+                {!!games && 
+                    <Slider {...settings}>
+                      {Object.keys(games).map(key =>
+                        <div key={key} className="slide">
+                          <div className="form-group form-group-slide">
+                            <div>{games[key].gameName}</div>
+                            <div>{this.createGameStartDate(games[key].gameDate)}</div>
+                            <div>{this.createGameTimeDate(games[key].gameStartTime)}</div>
+                            <div className="center"><Link className="btn btn-block btn-lg btn-primary" to={`/game/${games[key].id}`}> Join Game </Link></div>
+                          </div>
+                        </div>
+                      )}
+                    </Slider>
+                }
+                </div>
+              </div>
             </div>
           </div>
         );

@@ -66,7 +66,7 @@ class GameScoreSingle extends Component {
     render() {
         return (
             <div className="form-group">
-                <label for="exampleInputEmail1">{`Hole Number ${this.props.id}`}</label>
+                <label className="label-number" for="exampleInputEmail1"><span>{this.props.id}</span><span className="label-number-text">Hole</span></label>
                 <label className="login-field-icon fui-question-circle" for="login-name"></label>
                 <input
                     id={this.props.id}  

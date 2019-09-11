@@ -7,10 +7,12 @@ import { db, firebase } from '../firebase'
 
 import { COURSESCORES } from '../data'
 import GameScoreSingle from './GameScoreSingle'
-import FixedNavagationBottom from './FixedNavagationBottom'
+import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom'
 
 import '../App.css';
 import '../css/flat-ui.css';
+
 
 class GameScore extends Component {
     constructor(props) {
@@ -125,10 +127,16 @@ class GameScore extends Component {
                     link: '/',
                     icon: 'fui-home',
                 },
+                // {
+                //     name: 'Chat',
+                //     link: `/game/${this.props.match.params.game}/chat`, 
+                //     icon: 'fui-chat',
+                // },
                 {
-                    name: 'Chat',
-                    link: `/game/${this.props.match.params.game}/chat`, 
-                    icon: 'fui-chat',
+                    name: 'Scores',
+                    link: `/game/${this.props.match.params.game}/scores/`, 
+                    //link: `/game/${this.props.match.params.game}/score/`, 
+                    icon: 'fui-document',
                 },
                 {
                     name: 'Back',
@@ -146,12 +154,25 @@ class GameScore extends Component {
         return (
           <div className="App">
             <div className="container">
+                <div className="row tile-header">
+                    <div className="col">
+                        <h3 className="tile-title">{ !!user && user.username }</h3>
+                        {!!this.state.navLinks && 
+                            <NavagationTop links={this.state.navLinks} />
+                        }
+                    </div>
+                </div>
                 <div className="row tile">
                     <div className="col">
-                        <h4 className="tile-title">Scorecard</h4>
-                        <h3 className="tile-title">{ !!user && user.username }</h3>
-                        <h4 className="tile-title">{ !!coursePar && `Course Par: ${coursePar}` }</h4>
-                        <h4 className="tile-title">{ !!score && `Current Score: ${score.totalScore}` }</h4>
+                        <h4 className="tile-title">SCORECARD</h4>
+                        <div className="form-group form-group-header">
+                            <div className="form-group-col">
+                                { !!coursePar && `Par: ${coursePar}` }
+                            </div>
+                            <div className="form-group-col">
+                                { !!score && `Score: ${score.totalScore}` }
+                            </div>
+                        </div>
                         
                         {score.currentScore.length === 0 ? (
                             <div>Loading...</div>
@@ -163,7 +184,7 @@ class GameScore extends Component {
                 </div>
             </div>
             {!!this.state.navLinks && 
-                <FixedNavagationBottom links={this.state.navLinks} />
+                <NavagationBottom links={this.state.navLinks} />
             }
           </div>
         );

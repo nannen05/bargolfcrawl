@@ -8,7 +8,7 @@ import { db, firebase } from '../firebase'
 import '../App.css';
 import '../css/fixed-nav.css';
 
-class FixedNavagationBottom extends Component {
+class NavagationBottom extends Component {
     constructor(props) {
         super();
 
@@ -48,4 +48,4 @@ const mapStateToProps = ({}) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, actions)(FixedNavagationBottom));
+export default withRouter(connect(mapStateToProps, actions)(NavagationBottom));

@@ -47,8 +47,10 @@ const NavigationNonAuth = () =>
     </p>
     <div className="btn"><Link to="/signin"> Sign In </Link></div>
     <div className="btn"><Link to="/signup"> Sign Up </Link></div>
-    <div className="btn"><Link to="/scores"> Scores </Link></div>
-    <div className="btn"><Link to="/course"> Course Rules </Link></div>
+    {
+      // <div className="btn"><Link to="/scores"> Scores </Link></div>
+      // <div className="btn"><Link to="/course"> Course Rules </Link></div>
+    }
   </div>
 
 export default Navigation;

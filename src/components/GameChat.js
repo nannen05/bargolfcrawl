@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
-import FixedNavagationBottom from './FixedNavagationBottom';
+import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom';
 
 import '../App.css';
 import '../css/flat-ui.css';
@@ -15,6 +16,7 @@ class GameChat extends Component {
 
         this.state = {
             game: null,
+            chat: [],
             authUser: null,
             navLinks: []
         }
@@ -59,7 +61,7 @@ class GameChat extends Component {
 
     render() {
 
-        const { game, authUser } = this.state
+        const { game, chat, authUser } = this.state
 
         //console.log(this.state)
     
@@ -67,26 +69,36 @@ class GameChat extends Component {
           <div className="App">
               {(!!game && !!authUser) && 
                 <div className="container">
+                    <div className="row tile-header">
+                        <div className="col">
+                            <h3 className="tile-title">Chat</h3>
+                            {!!this.state.navLinks && 
+                                <NavagationTop links={this.state.navLinks} />
+                            }
+                        </div>
+                    </div>
                     <div className="row tile">
                         <div className="col">
-                            <h4 className="tile-title">Chat</h4>
-                            <h3 className="tile-title">{game.gameName}</h3>
-                            <div>
-                                <Link to={`/game/${this.state.game.id}/score/${this.state.authUser.uid}`}>Edit Score</Link>
+                            <h4 className="tile-title">{game.gameName}</h4>
+                            <div className="form-group form-group-chat">
+                                {chat.length === 0 ? (
+                                    <div>Loading...</div>
+                                ) : (
+                                    <div>Chat...</div>
+                                )}
                             </div>
-                            <div>
-                                <Link to={`/game/${this.state.game.id}/scores`}>View Scores</Link>
+                            <div className="form-group form-group-textarea">
+                                <textarea rows="4">
+                                
+                                </textarea>
                             </div>
-                            <div>
-                                <Link to={`/game/${this.state.game.id}/chat`}>Chat</Link>
-                            </div>
-                            
+                            <div class="btn btn-block btn-lg btn-primary">SEND</div>
                         </div>
                     </div>
                 </div>
               }
               {!!this.state.navLinks && 
-                <FixedNavagationBottom links={this.state.navLinks} />
+                <NavagationBottom links={this.state.navLinks} />
               }
           </div>
         );

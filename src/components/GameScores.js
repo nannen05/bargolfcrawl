@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom'
-import { db } from '../firebase'
+import { db, firebase } from '../firebase'
 import * as actions from "../store/actions";
 
 import '../App.css';
 import '../css/flat-ui.css';
 
-import FixedNavagationBottom from './FixedNavagationBottom';
+import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom';
 
 class GameScores extends Component {
   constructor(props) {
@@ -16,11 +17,23 @@ class GameScores extends Component {
     this.state = {
       users: null,
       userNames: null,
+      authUser: null
     };
 
   }
 
   componentDidMount() {
+    firebase.auth.onAuthStateChanged(authUser => {
+        if(firebase.auth.currentUser) {
+            console.log(firebase.auth.currentUser)
+            // Get Current User
+            this.setState({ authUser: firebase.auth.currentUser })
+            
+
+            this.createBottomNav()
+        }
+    })
+
     db.onceGetUsers().then(snapshot =>
       this.setState({ userNames: snapshot.val() })
     );
@@ -29,8 +42,6 @@ class GameScores extends Component {
         .then(users => {
             this.setState({ users })
         })
-
-    this.createBottomNav()
   }
 
   renderSortedList(users) {
@@ -49,7 +60,7 @@ class GameScores extends Component {
       })
 
       return sortedList.map((value, index) => {
-          return <p key={index} className="player-score"><span className="cap">{value[2]}</span>  <span className="right">Score: {value[1]}</span></p>
+          return <div key={index} className="form-group form-group-text"><div className="form-group-col">{value[2]}</div><div className="form-group-col">Score: {value[1]}</div></div>
       })
   }
 
@@ -62,9 +73,10 @@ class GameScores extends Component {
                 icon: 'fui-home',
             },
             {
-                name: 'Chat',
-                link: `/game/${this.props.match.params.game}/chat`, 
-                icon: 'fui-chat',
+                name: 'Score',
+                link: `/game/${this.props.match.params.game}/score/${this.state.authUser.uid}`, 
+                //link: `/game/${this.props.match.params.game}/score/`, 
+                icon: 'fui-new',
             },
             {
                 name: 'Back',
@@ -84,17 +96,22 @@ class GameScores extends Component {
       
       <div className="App">
         <div className="container">
-            <div className="row tile">
+            <div className="row tile-header">
                 <div className="col">
                     <h3 className="tile-title">Scores</h3>
+                    {!!this.state.navLinks && 
+                        <NavagationTop links={this.state.navLinks} />
+                    }
                 </div>
+            </div>
+            <div className="row tile">
                 <div className="col">
                     { !!users && this.renderSortedList(users) }
                 </div>
             </div>
         </div>
         {!!this.state.navLinks && 
-            <FixedNavagationBottom links={this.state.navLinks} />
+            <NavagationBottom links={this.state.navLinks} />
         }
       </div>
     );
