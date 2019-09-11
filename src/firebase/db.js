@@ -136,3 +136,16 @@ export const getGameRules = (gameID) => {
 	
 	return rules
 }
+
+export const getGameHoleNumber = (gameID) => {
+	let number = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+	.then(snapshot => {
+			let gameHoleNumber = snapshot.val().gameHoleNumber
+			if(!gameHoleNumber)
+				return 
+
+			return gameHoleNumber
+	})
+	
+	return number
+}

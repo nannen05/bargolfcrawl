@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
-import { COURSESCORES } from '../data'
 import GameScoreSingle from './GameScoreSingle'
 import NavagationTop from './NavagationTop';
 import NavagationBottom from './NavagationBottom'
@@ -26,8 +25,10 @@ class GameScore extends Component {
                 currentScore: [],
                 totalScore: 0
             },
+            holeNumber: null,
             playerScore: false,
             coursePar: null,
+            courseParHoles: [],
             authUser: null,
             navLinks: []
         }
@@ -56,10 +57,25 @@ class GameScore extends Component {
                             score: res
                         })
                     })
+
+                // Get Course Par from rules
+                db.getGameRules(game)
+                    .then(res => {
+                        this.getCoursePar(res)
+                    })
+
+                // Get Hole Number Limit
+                db.getGameHoleNumber(game)
+                    .then(res => {
+                        this.setState({
+                            holeNumber: res
+                        })
+                    })
+
+
             }
         })
 
-        this.createCoursePar()
         this.createBottomNav()
     }
 
@@ -89,6 +105,19 @@ class GameScore extends Component {
             })
     }
 
+    getCoursePar(data) {
+        let coursePar = []
+
+        data.map((value, index) => {
+            coursePar.push( (parseInt(value.parScore, 10) || 0) )
+        })
+
+        this.setState({
+            coursePar: coursePar.reduce((a, b) => +a + +b),
+            courseParHoles: coursePar
+        })
+    }
+
     getCurrentScore(value, index) {
         let PlayerScore = []
         this.state.score.currentScore.map((value, index) => {
@@ -101,22 +130,18 @@ class GameScore extends Component {
     }
 
     createScoreList() {
-        let ScoreList = this.state.score.currentScore.map((value, index) =>  {
-            return <GameScoreSingle data={value} key={index} id={index + 1} getScoreChange={(value, index) => this.getScore(value, index)}/>
+        const { holeNumber, courseParHoles, score } = this.state
+        //let ScoreList = this.state.score.currentScore.splice(0, holeNumber).map((value, index) =>  {
+        let ScoreList = score.currentScore.map((value, index) =>  {   
+            return <GameScoreSingle 
+                        data={value} 
+                        par={courseParHoles[index]}
+                        key={index} id={index + 1} 
+                        getScoreChange={(value, index) => this.getScore(value, index)}
+                    />
         })
   
         return ScoreList
-    }
-
-    createCoursePar() {
-        let parScore = []
-
-        COURSESCORES.map((value, index) => {
-            parScore.push( value.par )
-        })
-        this.setState({
-            coursePar: parScore.reduce((a, b) => a + b),
-        })
     }
 
     createBottomNav() {
@@ -149,7 +174,7 @@ class GameScore extends Component {
 
     render() {
 
-        const { user, coursePar, score } = this.state
+        const { user, coursePar, courseParHoles, score, holeNumber } = this.state
 
         return (
           <div className="App">
@@ -167,14 +192,14 @@ class GameScore extends Component {
                         <h4 className="tile-title">SCORECARD</h4>
                         <div className="form-group form-group-header">
                             <div className="form-group-col">
-                                { !!coursePar && `Par: ${coursePar}` }
+                                { !!coursePar && `Course Par: ${coursePar}` }
                             </div>
                             <div className="form-group-col">
                                 { !!score && `Score: ${score.totalScore}` }
                             </div>
                         </div>
                         
-                        {score.currentScore.length === 0 ? (
+                        {(score.currentScore.length === 0 && holeNumber != null && courseParHoles.length === 0) ? (
                             <div>Loading...</div>
                         ) : (
                             this.createScoreList()

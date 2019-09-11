@@ -48,10 +48,11 @@ render(
 		      </Route>
 		      <Route path="/signup" component={SignUp}>
 		      </Route>
-	          <Route path="/course" component={Course}>
-	          </Route>
-		      <Route path="/scores" component={Score}>
-			  </Route> 
+			  {
+				  //Todo
+				  //<Route path="/profile" component={Profile}>
+				  //</Route>
+			  }
 			  <Route path="/games" component={Games}>
 			  </Route>
 			  <Route exact path="/game/:game" component={Game}>
@@ -63,9 +64,16 @@ render(
 			  <Route exact path="/game/:game/courserules" component={GameRules}>
 			  </Route>  
 			  <Route exact path="/game/:game/chat" component={GameChat}>
-		      </Route> 
-		      <Route path="/score/:player" component={PlayerScoreLoggedIn}>
-		      </Route>
+			  </Route> 
+			  {
+				//   <Route path="/course" component={Course}>
+				//   </Route>
+				//   <Route path="/scores" component={Score}>
+				//   </Route> 
+				//   <Route path="/score/:player" component={PlayerScoreLoggedIn}>
+				//   </Route>
+			  }
+		      
 	      </Switch>
     </BrowserRouter>
   </Provider>,

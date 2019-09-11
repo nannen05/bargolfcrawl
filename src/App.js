@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from './logo.svg';
-import './App.css';
+
 import * as actions from "./store/actions";
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { firebase } from './firebase';
 
 import Navigation from './components/Navigation'
+
+import './App.css';
+import './css/flat-ui.css';
 
 class App extends Component {
   constructor(props) {
@@ -27,12 +29,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to End Of Summer (Bar) Golf Tournament</h2>
+      <div className="App index">
+        <div className="container">
+          <div className="row tile-header">
+              <div className="col">
+                  <h3 className="tile-title">Golf (Bar) Tournament</h3>
+              </div>
+          </div>
         </div>
-        <Navigation authUser={this.state.authUser} />
+        <div className="row tile">
+          <Navigation authUser={this.state.authUser} />
+        </div>
       </div>
     );
   }
