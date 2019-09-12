@@ -50,13 +50,30 @@ class GameScore extends Component {
                 // Push Player To Game DataBase
                 db.setGameUser(game, player)
 
-                // Get Player Score
+                // Get Player Score after User is Set
                 db.getGamePlayerScore(game, player)
                     .then(res => {
+
+                        if(res === undefined) {
+                            getGamePlayerScoreCallback(game, player)
+                            return
+                        }
+
                         this.setState({
                             score: res
                         })
+
                     })
+                
+                const getGamePlayerScoreCallback = (game, player) => {
+                    db.getGamePlayerScore(game, player)
+                        .then(res => {
+                            console.log(res)
+                            this.setState({
+                                score: res
+                            })
+                        })
+                }
 
                 // Get Course Par from rules
                 db.getGameRules(game)

@@ -27,6 +27,9 @@ import PlayerScore from "./components/PlayerScore";
 import PlayerScoreLoggedIn from "./components/PlayerScoreLoggedIn";
 import './index.css'
 
+import './App.css';
+import './css/flat-ui.css';
+
 const defaultState = {};
 
 
@@ -48,11 +51,9 @@ render(
 		      </Route>
 		      <Route path="/signup" component={SignUp}>
 		      </Route>
-			  {
-				  //Todo
-				  //<Route path="/profile" component={Profile}>
-				  //</Route>
-			  }
+			  <Route path="/profile" component={Profile}>
+			  </Route>
+			  
 			  <Route path="/games" component={Games}>
 			  </Route>
 			  <Route exact path="/game/:game" component={Game}>

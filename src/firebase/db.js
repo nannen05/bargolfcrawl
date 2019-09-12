@@ -16,6 +16,12 @@ export const getCurrentUser = (uid) => {
 	return db.ref('users/' + uid)
 }
 
+export const changeUserName = (uid, name) => {
+	db.ref(`/users/${uid}`).update({
+		username: name
+	})
+}
+
 export const setScore = (uid, updatedScore, holeNumber, updatedTotalScore) => {
 	//db.ref('/users/' + uid + '/SCORE/').update({totalScore: updatedTotalScore})
 	db.ref('/users/' + uid + '/SCORE/courseScore/' + holeNumber).set({
@@ -58,14 +64,20 @@ export const setGameUser = (gameID, userID) => {
 			let gameUsers = snapshot.val().gameUsers
 
 			if(!gameUsers)
-				return db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( { userID, SCORE } )
+				return db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).set( { userID, SCORE } )
 
-			Object.keys(gameUsers).map(key => {
-					if(!gameUsers[key].userID == userID) {
-						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).child('gameUsers').push( { userID, SCORE } )
+			db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).once('value')
+				.then(snapshot => {
+					// Check if User Exists
+					if(!snapshot.val()) {
+						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).set( { userID, SCORE } )
 					}
-			})
+				})
+
+			return
 		})
+
+	return
 }
 
 export const getGameUsers = (gameID) => {
@@ -81,24 +93,33 @@ export const getGameUsers = (gameID) => {
 	return users
 }
 
-export const getGamePlayerScore = async (gameID, userID) => {
+export const getGamePlayerScore = (gameID, userID) => {
+
+	let userScore = ''
+
 	let score = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
 		.then(snapshot => {
 			let gameUsers = snapshot.val().gameUsers
 			if(!gameUsers)
 				return 
 
-				Object.keys(gameUsers).map(key => {
-					if(gameUsers[key].userID == userID) {
-						//console.log(gameUsers[key])
-						return score = gameUsers[key].SCORE
+			userScore = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).once('value')
+				.then(snapshot => {
+					let user = snapshot.val()
+
+					if(!user) 
+						return
+
+					// Check if User Exists
+					if(user) {
+						return user.SCORE
 					}
 				})
 
-				return score
+			return userScore
 		})
 
-		return await score
+	return score
 }
 
 export const setGamePlayerScore = async (userID, gameID, updatedScore, holeNumber, updatedTotalScore) => {

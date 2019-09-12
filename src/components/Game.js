@@ -24,45 +24,47 @@ class Game extends Component {
 
     componentDidMount() {
         firebase.auth.onAuthStateChanged(authUser => {
-            authUser ? this.setState({ authUser }) : this.setState({ authUser: null });
-            this.setState({
-                navLinks: [
-                    {
-                        name: 'Home',
-                        link: '/',
-                        icon: 'fui-home',
-                    },
-                    {
-                        name: 'Scores',
-                        link: `/game/${this.props.match.params.game}/scores/`, 
-                        //link: `/game/${this.props.match.params.game}/score/`, 
-                        icon: 'fui-document',
-                    },
-                    {
-                        name: 'Score',
-                        link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
-                        //link: `/game/${this.props.match.params.game}/score/`, 
-                        icon: 'fui-new',
-                    },
-                    {
-                        name: 'Rules',
-                        link: `/game/${this.props.match.params.game}/courserules`, 
-                        //link: `/game/${this.props.match.params.game}/score/`, 
-                        icon: 'fui-question-circle',
-                    },
-                    // {
-                    //     name: 'Chat',
-                    //     link: `/game/${this.props.match.params.game}/chat`, 
-                    //     //link: `/game/${this.props.match.params.game}/score/`, 
-                    //     icon: 'fui-chat',
-                    // },
-                    {
-                        name: 'Back',
-                        link: `/games`,
-                        icon: 'fui-arrow-left',
-                    }
-                ],
-            })
+            if(firebase.auth.currentUser) {
+                this.setState({ authUser: firebase.auth.currentUser })
+                this.setState({
+                    navLinks: [
+                        {
+                            name: 'Home',
+                            link: '/',
+                            icon: 'fui-home',
+                        },
+                        {
+                            name: 'Scores',
+                            link: `/game/${this.props.match.params.game}/scores/`, 
+                            //link: `/game/${this.props.match.params.game}/score/`, 
+                            icon: 'fui-document',
+                        },
+                        {
+                            name: 'Score',
+                            link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
+                            //link: `/game/${this.props.match.params.game}/score/`, 
+                            icon: 'fui-new',
+                        },
+                        {
+                            name: 'Rules',
+                            link: `/game/${this.props.match.params.game}/courserules`, 
+                            //link: `/game/${this.props.match.params.game}/score/`, 
+                            icon: 'fui-question-circle',
+                        },
+                        // {
+                        //     name: 'Chat',
+                        //     link: `/game/${this.props.match.params.game}/chat`, 
+                        //     //link: `/game/${this.props.match.params.game}/score/`, 
+                        //     icon: 'fui-chat',
+                        // },
+                        {
+                            name: 'Back',
+                            link: `/games`,
+                            icon: 'fui-arrow-left',
+                        }
+                    ],
+                })
+            }
         });
 
         db.getGame(this.props.match.params.game).then(snapshot =>

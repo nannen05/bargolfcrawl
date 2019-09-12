@@ -53,6 +53,7 @@
     position: relative;
     padding: 18px 0px;
     margin-bottom: 60px;
+    min-width: 100px;
 }
 
 .top-nav-links a:before {

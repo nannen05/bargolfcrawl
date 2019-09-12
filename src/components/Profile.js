@@ -1,79 +1,111 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from '../logo.svg';
-import '../App.css';
 import * as actions from "../store/actions";
-import { Link, withRouter } from 'react-router-dom'
-//import { auth, db } from '../firebase';
-import { firebase } from '../firebase';
+import { withRouter } from 'react-router-dom'
+import { firebase, db } from '../firebase';
+
+import NavagationTop from './NavagationTop';
+
+import '../App.css';
+import '../css/flat-ui.css';
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+      super(props);
 
-        this.state = {
-            authUser: null,
-        };
-    }
+      this.state = {
+          authUser: null,
+          authUserName: null,
+          userName: '',
+      };
 
-    componentDidMount() {
-        firebase.auth.onAuthStateChanged(authUser => {
-        authUser
-            ? this.setState({ authUser })
-            : this.setState({ authUser: null });
-        });
-    }
+      this.handleChange.bind(this);
+      this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+      firebase.auth.onAuthStateChanged(authUser => {
+        if(firebase.auth.currentUser) {
+          this.setState({ authUser })
+
+          db.getCurrentUser(firebase.auth.currentUser.uid)
+            .once('value')
+            .then(snapshot => {
+
+                this.setState({
+                    authUserName: snapshot.val().username
+                })  
+            })
+        }
+
+        this.setState({
+          navLinks: [
+              {
+                  name: 'Home',
+                  link: '/',
+                  icon: 'fui-home',
+              },
+              {
+                name: 'Games',
+                link: `/games`, 
+                icon: 'fui-star-2',
+              },
+              {
+                  name: 'Sign Out',
+                  link: `/games`,
+                  icon: 'fui-power',
+              }
+          ],
+        })
+      });
+  }
+
+  handleChange(event) {
+    this.setState({authUserName: event.target.value});
+  }
+
+  handleSubmit(event) {
+    console.log('A name was submitted: ' + this.state.authUserName);
+    db.changeUserName(this.state.authUser.uid, this.state.authUserName)
+    event.preventDefault();
+  }
 
   render() {
 
-    //const {email, uid} = this.state.authUser
-
-    //console.log(email)
-
-    // const {
-    //   email,
-    //   password,
-    //   error,
-    // } = this.state;
-
-    //const isInvalid =
-      //password === '' ||
-    //  email === '';
+    const { authUser, authUserName } = this.state
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Profile</h2>
-        </div>
-        <div className="App-login">
-            {!!this.state.authUser && 
-                
-                <form onSubmit={this.onSubmit}>
-                    <input
-                    value={this.state.authUser.email}
-                    // onChange={event => this.setState(byPropKey('email', event.target.value))}
-                    type="text"
-                    placeholder="Email Address"
-                    />
-                    <input
-                    //value={password}
-                    // onChange={event => this.setState(byPropKey('password', event.target.value))}
-                    type="password"
-                    placeholder="Password"
-                    />
-                    <button type="submit">
-                    Update
-                    </button>
-  
-                    {/* { error && <p>{error.message}</p> } */}
-                </form>
-            
-            }
-
-            <div className="App-login">
-              <div className="btn"><Link to="/"> Home </Link></div>
-            </div>
+        <div className="container">
+          <div className="row tile-header">
+              <div className="col">
+                  <h3 className="tile-title">Profile</h3>
+                  {!!this.state.navLinks && 
+                      <NavagationTop links={this.state.navLinks} />
+                  }
+              </div>
+          </div>
+          <div className="row tile">
+              <div className="col">
+                  {!!authUser && 
+                    
+                    <form onSubmit={this.handleSubmit}>
+                        <div class="form">
+                          <div className="form-group form-group-input">
+                              <input 
+                                value={authUserName}
+                                onChange={e => this.handleChange(e)}
+                                type="text" 
+                                className="input-field" 
+                                placeholder="Enter your name" 
+                              />
+                          </div>
+                          <div onClick={e => this.handleSubmit(e)} type="submit" value="Update Info" class="btn btn-primary btn-lg btn-block input-btn">Update Username</div>
+                      </div>
+                    </form>
+                  }
+              </div>
+          </div>
         </div>
       </div>
     );
@@ -88,5 +120,3 @@ const mapStateToProps = (state) => {
 };
 
 export default withRouter(connect(mapStateToProps, actions)(Profile));
-
-//export default App

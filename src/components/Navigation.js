@@ -60,11 +60,8 @@ class NavigationAuth extends Component {
         return(
             <div>
                 {!!this.state.navLinks && 
-                  <NavagationTop links={this.state.navLinks} />
+                  <NavagationTop links={this.state.navLinks}  />
                 }
-                <div className="App-login">
-                  <SignOutButton />
-                </div>
             </div>
             
         )

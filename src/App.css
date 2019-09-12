@@ -113,11 +113,47 @@
     margin-bottom: -10px;
 }
 
+.form-group.form-group-input .input-field {
+    margin-bottom: 0;
+    border: none;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    height: 32px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.form .input-btn {
+    width: 100%;
+    max-width: calc(100% - 38px);
+    display: block;
+    text-transform: uppercase;
+    position: relative;
+    background: transparent;
+}
+
+.form .input-btn:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 45px;
+    width: 100%;
+    background: #333;
+    opacity: 0.15;
+    top: 50%;
+    border-radius: 6px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .form-group.form-group-header:before,
 .form-group.form-group-text:before,
 .form-group.form-group-slide:before,
 .form-group.form-group-textarea:before,
-.form-group.form-group-chat:before {
+.form-group.form-group-chat:before,
+.form-group.form-group-input:before {
     display: none ;
 }
 
@@ -277,10 +313,6 @@ form button {
     font-size: 16px; */
 }
 
-form {
-  max-width: 300px;
-}
-
 form button:disabled {
     background: #dddddd;
 }
@@ -406,16 +438,16 @@ span.cap {
 
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #fff;
+    color: inherit;
     opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #fff;
+    color:inherit
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #fff;
+    color: inherit
 }
 
 @keyframes App-logo-spin {
