@@ -68,18 +68,45 @@ class NavigationAuth extends Component {
     }
 }
 
-
-const NavigationNonAuth = () =>
-  <div className="App-login">
-    <p className="App-intro">
-       To get started, Sign in or Sign up and you will be able to update your score.<br/><br/>
-    </p>
-    <div className="btn"><Link to="/signin"> Sign In </Link></div>
-    <div className="btn"><Link to="/signup"> Sign Up </Link></div>
-    {
-      // <div className="btn"><Link to="/scores"> Scores </Link></div>
-      // <div className="btn"><Link to="/course"> Course Rules </Link></div>
+class NavigationNonAuth extends Component {
+    constructor(props) {
+        super();
+  
+        this.state = {
+            navLinks: []
+        }
     }
-  </div>
+  
+    componentDidMount() {
+      this.setState({
+          navLinks: [
+              {
+                  name: 'Sign In',
+                  link: `/signin`, 
+                  //link: `/game/${this.props.match.params.game}/score/`, 
+                  icon: 'fui-star-2',
+              },
+              {
+                  name: 'Sign Up',
+                  link: `/signup`, 
+                  //link: `/game/${this.props.match.params.game}/score/`, 
+                  icon: 'fui-user',
+              }
+          ],
+      })
+    }
+  
+      render() {
+          return(
+              <div>
+                  {!!this.state.navLinks && 
+                    <NavagationTop links={this.state.navLinks}  />
+                  }
+              </div>
+              
+          )
+      }
+  }
+
 
 export default Navigation;

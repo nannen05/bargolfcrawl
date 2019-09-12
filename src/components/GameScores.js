@@ -90,7 +90,7 @@ class GameScores extends Component {
 
   render() {
 
-    const { users } = this.state
+    const { users, userNames } = this.state
 
     return (
       
@@ -106,7 +106,7 @@ class GameScores extends Component {
             </div>
             <div className="row tile">
                 <div className="col">
-                    { !!users && this.renderSortedList(users) }
+                    { (!!users && !!userNames ) && this.renderSortedList(users) }
                 </div>
             </div>
         </div>

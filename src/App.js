@@ -7,6 +7,7 @@ import { firebase } from './firebase';
 
 import Navigation from './components/Navigation'
 
+import golfHole from '../src/images/golf-hole.svg';
 import './App.css';
 import './css/flat-ui.css';
 
@@ -33,6 +34,7 @@ class App extends Component {
         <div className="container">
           <div className="row tile-header">
               <div className="col">
+                  <object data={golfHole}></object>
                   <h3 className="tile-title">Golf (Bar) Tournament</h3>
               </div>
           </div>

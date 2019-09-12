@@ -240,6 +240,14 @@ h4 {
     margin-bottom: -10px!important;
 }
 
+object {
+    max-width: 100px;
+}
+
+svg {
+    fill: #fff;
+}
+
 .btn-block {
     margin-bottom: 20px;
 }
