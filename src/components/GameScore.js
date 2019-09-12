@@ -6,6 +6,8 @@ import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
 import GameScoreSingle from './GameScoreSingle'
+
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
 import NavagationBottom from './NavagationBottom'
 
@@ -27,6 +29,7 @@ class GameScore extends Component {
             },
             holeNumber: null,
             playerScore: false,
+            rules: null,
             coursePar: null,
             courseParHoles: [],
             authUser: null,
@@ -75,9 +78,10 @@ class GameScore extends Component {
                         })
                 }
 
-                // Get Course Par from rules
+                // Get Rules and Course Par from gameRules
                 db.getGameRules(game)
                     .then(res => {
+                        this.getCourseRules(res)
                         this.getCoursePar(res)
                     })
 
@@ -122,6 +126,16 @@ class GameScore extends Component {
             })
     }
 
+    getCourseRules(data) {
+        let rules = []
+        
+        data.map((value, index) => {
+            rules.push( value )
+        })
+
+        this.setState({ rules })
+    }
+
     getCoursePar(data) {
         let coursePar = []
 
@@ -147,18 +161,23 @@ class GameScore extends Component {
     }
 
     createScoreList() {
-        const { holeNumber, courseParHoles, score } = this.state
-        //let ScoreList = this.state.score.currentScore.splice(0, holeNumber).map((value, index) =>  {
-        let ScoreList = score.currentScore.map((value, index) =>  {   
-            return <GameScoreSingle 
-                        data={value} 
-                        par={courseParHoles[index]}
-                        key={index} id={index + 1} 
-                        getScoreChange={(value, index) => this.getScore(value, index)}
-                    />
-        })
-  
-        return ScoreList
+        const { holeNumber, courseParHoles, score, rules } = this.state
+
+        if(rules) {
+            //let ScoreList = this.state.score.currentScore.splice(0, holeNumber).map((value, index) =>  {
+            let ScoreList = score.currentScore.map((value, index) =>  {   
+                return <GameScoreSingle 
+                            data={value} 
+                            par={courseParHoles[index]}
+                            rule={rules[index]}
+                            key={index} id={index + 1} 
+                            getScoreChange={(value, index) => this.getScore(value, index)}
+                        />
+            })
+    
+            return ScoreList
+        }
+
     }
 
     createBottomNav() {
@@ -195,6 +214,7 @@ class GameScore extends Component {
 
         return (
           <div className="App">
+            <NavBar />
             <div className="container">
                 <div className="row tile-header">
                     <div className="col">

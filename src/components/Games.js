@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db } from '../firebase'
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
 import NavagationBottom from './NavagationBottom'
 
@@ -66,6 +67,7 @@ class Games extends Component {
     
         return (
           <div className="App">
+            <NavBar/>
             <div className="container">
               <div className="row tile-header">
                   <div className="col">

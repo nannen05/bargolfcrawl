@@ -1,0 +1,38 @@
+.ReactModal__Content {
+    padding: 50px 20px 20px!important; 
+}
+
+.ReactModal__Content .close {
+    position: absolute;
+    right: 10px;
+    color: #34495e;
+    top: 15px;
+}
+
+.ReactModal__Content .rule-title {
+    font-size: 20px!important;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.ReactModal__Content .rule {
+    color: #34495e;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px!important;
+    line-height: 12px!important;
+    display: flex;
+    justify-content: space-between;
+    /* max-width: 250px; */
+    margin: 0 auto 10px;
+}
+
+.ReactModal__Content .rule span {
+    color: #34495e;
+    
+    /* text-transform: uppercase;
+    font-weight: 600;
+    //font-size: 10px!important;
+    line-height: 10px!important; */
+}

@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import * as actions from "../store/actions";
 import { withRouter } from 'react-router-dom'
 import { auth } from '../firebase';
+
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
+import NavagationBottom from './NavagationBottom'
 
 
 const byPropKey = (propertyName, value) => () => ({
@@ -78,6 +81,7 @@ class SignIn extends Component {
     return (
       <div className="App">
         <div className="container">
+          <NavBar />
           <div className="row tile-header">
               <div className="col">
                   <h3 className="tile-title">Sign In</h3>

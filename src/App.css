@@ -33,23 +33,56 @@
     position: relative;
 }
 
+.App .tile h3{
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 40px!important;
+    display: block;
+    position: relative;
+}
+
 .App .tile {
     background: transparent;
     z-index: 1;
-    min-height: 310px;
+    /* min-height: 310px; */
 }
 
-.App .tile:before {
+.App .tile.slide {
+    background: #eff0f2;
+    text-align: left;
+}
+
+.App .tile-header {
+    position: relative;
+    background: transparent;
+    z-index: 1;
+    /* min-height: 310px; */
+}
+
+/* .App .tile-header:before {
     content: "";
     position: absolute;
     left: 50%;
-    height: calc(100% + 120px);
+    height: calc(100%);
     width: 100vw;
     background: #333;
     opacity: 0.1;
-    top: -30px;
+    top: -40px;
     transform: translateX(-50%);
     z-index: -1;
+} */
+
+.App .tile-header:before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 1px;
+    width: 90%;
+    background: #fff;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: -1;
+    bottom: 30px;
 }
 
 .App h4.tile-title {
@@ -242,10 +275,6 @@ h4 {
 
 object {
     max-width: 100px;
-}
-
-svg {
-    fill: #fff;
 }
 
 .btn-block {
@@ -461,4 +490,60 @@ span.cap {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+.rules-slider {
+    width: 100%;
+}
+
+.rules-slider .rule-title {
+    font-size: 20px!important;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.rules-slider.rule {
+    color: #34495e;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px!important;
+    line-height: 12px!important;
+    display: flex;
+    justify-content: space-between;
+    /* max-width: 250px; */
+    margin: 0 auto 10px;
+}
+
+.rules-slider .rule span {
+    color: #34495e;
+    
+    /* text-transform: uppercase;
+    font-weight: 600;
+    //font-size: 10px!important;
+    line-height: 10px!important; */
+}
+
+.App .navbar-default {
+    background-color: #edf0f1;
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 0;
+}
+
+.App .navbar-default .container {
+    padding: 0;
+    max-width: 100%;
+}
+
+.App .navbar-default .navbar-brand {
+    color: #34495e;
+    padding-top: inherit;
+    margin-top: 8px;
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    font-size: 20px;
+    height: 38px;
 }

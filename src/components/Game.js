@@ -5,8 +5,9 @@ import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
-import NavagationBottom from './NavagationBottom';
+import NavagationBottom from './NavagationBottom'
 
 import '../App.css';
 import '../css/flat-ui.css';
@@ -79,10 +80,11 @@ class Game extends Component {
         const { game, authUser } = this.state
     
         return (
-          <div className="App center">
+          <div className="App">
+              <NavBar />
               {(!!game && !!authUser) && 
                 <div className="container">
-                    <div className="row tile-header">
+                    <div className="row tile">
                         <div className="col">
                             <h3 className="tile-title">{game.gameName}</h3>
                             {!!this.state.navLinks && 

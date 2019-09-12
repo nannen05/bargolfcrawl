@@ -5,8 +5,9 @@ import Slider from "react-slick";
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
-import NavagationBottom from './NavagationBottom';
+import NavagationBottom from './NavagationBottom'
 
 import '../App.css';
 import '../css/flat-ui.css';
@@ -31,30 +32,36 @@ class RuleSlider extends React.Component {
       dots: true,
       arrows: false,
       fade: true,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
       variableWidth: true,
+      centerMode: true
     };
 
     const { rules } = this.state
 
     return (
-      <div>
+      <div className="rules-slider">
         {!!rules && 
            <Slider {...settings}>
               {Object.keys(rules).map(key =>
                 <div key={key} className="">
-                  <div className="center"><span>Hole: </span>{rules[key].holeNumber}</div>
-                  <div className="center"><span>Time: </span>{rules[key].time}</div>
-                  <div className="center"><span>Bar: </span>{rules[key].bar}</div>
-                  <div className="center"><span>Hole Par: </span>{rules[key].parScore}</div>
-                  <div className="center"><span>Eagle: </span>{rules[key].eagle}</div>
-                  <div className="center"><span>Birdie: </span>{rules[key].birdie}</div>
-                  <div className="center"><span>Par: </span>{rules[key].par}</div>
-                  <div className="center"><span>Bogey: </span>{rules[key].bogey}</div>
-                  <div className="center"><span>Doulbe Bogey: </span>{rules[key].doubleBogey}</div>
+                    <div className="tile slide">
+                        {!!rules[key].holeNumber && (
+                            <div className="rule-title">Hole -- {rules[key].holeNumber}</div>
+                        )}
+                        {!!rules[key].bar && (
+                            <div className="rule-title">Bar -- {rules[key].bar}</div>
+                        )}
+                        {!!rules[key].time && (
+                            <div className="rule-title">Time -- {rules[key].time}</div>
+                        )}
+                        {!!rules[key].parScore && (
+                            <div className="rule-title">Par -- {rules[key].parScore}</div>     
+                        )}
+                    </div> 
                 </div>
               )}
             </Slider>
@@ -121,6 +128,7 @@ class GameRules extends Component {
 
         return (
           <div className="App">
+             <NavBar/>
              <div className="container">
                 <div className="row tile-header">
                     <div className="col">
@@ -130,14 +138,15 @@ class GameRules extends Component {
                         }
                     </div>
                 </div>
-            </div>
-            <div className="row tile">
-                <div className="slider">
-                {!!rules && 
-                   <RuleSlider data={rules}/> 
-                }
+                <div className="row tile">
+                    <div className="slider">
+                        {!!rules && 
+                        <RuleSlider data={rules}/> 
+                        }
+                    </div>
                 </div>
             </div>
+            
           </div>
         )
     }

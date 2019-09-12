@@ -53,7 +53,6 @@ render(
 		      </Route>
 			  <Route path="/profile" component={Profile}>
 			  </Route>
-			  
 			  <Route path="/games" component={Games}>
 			  </Route>
 			  <Route exact path="/game/:game" component={Game}>

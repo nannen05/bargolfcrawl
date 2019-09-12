@@ -16,6 +16,7 @@
     "react": "^16.4.2",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.4.2",
+    "react-modal": "^3.10.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "0.9.x",
     "react-slick": "^0.23.1"

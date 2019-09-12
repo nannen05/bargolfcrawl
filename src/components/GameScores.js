@@ -7,8 +7,9 @@ import * as actions from "../store/actions";
 import '../App.css';
 import '../css/flat-ui.css';
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
-import NavagationBottom from './NavagationBottom';
+import NavagationBottom from './NavagationBottom'
 
 class GameScores extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ class GameScores extends Component {
     return (
       
       <div className="App">
+        <NavBar />
         <div className="container">
             <div className="row tile-header">
                 <div className="col">

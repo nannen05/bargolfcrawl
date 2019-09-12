@@ -4,6 +4,7 @@ import * as actions from "../store/actions";
 import { withRouter } from 'react-router-dom'
 import { firebase, db } from '../firebase';
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
 
 import '../App.css';
@@ -76,6 +77,7 @@ class Profile extends Component {
 
     return (
       <div className="App">
+        <NavBar />
         <div className="container">
           <div className="row tile-header">
               <div className="col">
