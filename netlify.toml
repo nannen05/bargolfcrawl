@@ -1,13 +1,3 @@
 [build]
   command = "yarn build"
   publish = "build"
-
-[context.production.environment]
-  TOML_ENV_VAR = "From netlify.toml"
-  REACT_APP_TOML_ENV_VAR = "From netlify.toml (REACT_APP_)"
-  REACT_APP_API_KEY = "From netlify.toml (REACT_APP_)"
-  REACT_APP_AUTH_DOMAIN = "From netlify.toml (REACT_APP_)"
-  REACT_APP_DATABASE_URL = "From netlify.toml (REACT_APP_)"
-  REACT_APP_PROJECT_ID = "From netlify.toml (REACT_APP_)"
-  REACT_APP_STORAGE_BUCKET= = "From netlify.toml (REACT_APP_)"
-  REACT_APP_MESSAGING_SENDER_ID = "From netlify.toml (REACT_APP_)"
