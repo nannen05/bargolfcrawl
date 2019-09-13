@@ -92,9 +92,15 @@ class GameScore extends Component {
                             holeNumber: res
                         })
                     })
+            } else {
+                const {
+                    history,
+                  } = this.props;
 
-
+                history.push("/");
             }
+
+            console.log(this.props)
         })
 
         this.createBottomNav()

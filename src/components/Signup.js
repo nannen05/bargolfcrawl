@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { auth, db } from '../firebase';
 import * as actions from "../store/actions";
 import { SCORE } from '../data'
 
+import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
-
-import logo from '../logo.svg';
-import '../App.css';
 
 const INITIAL_STATE = {
   username: '',
@@ -96,6 +94,7 @@ class SignUp extends Component {
     return (
       <div className="App">
         <div className="container">
+          <NavBar />
           <div className="row tile-header">
               <div className="col">
                   <h3 className="tile-title">Sign Up</h3>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
-import Slider from "react-slick";
 import * as actions from "../store/actions";
-import { db, firebase } from '../firebase'
 
 import '../App.css';
 import '../css/fixed-nav.css';

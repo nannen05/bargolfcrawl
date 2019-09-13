@@ -54,6 +54,12 @@ body{
     /* min-height: 310px; */
 }
 
+.App .tile.game {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+}
+
 .App .tile.slide {
     background: #eff0f2;
     text-align: left;
@@ -478,6 +484,16 @@ span.cap {
     padding-bottom: 5px;
     min-width: 300px;
     text-align: left;
+}
+
+.slide .btn-primary {
+    text-align: center;
+    display: block;
+    position: relative;
+    max-width: 170px;
+    margin: 20px auto 0;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 

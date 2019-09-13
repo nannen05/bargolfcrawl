@@ -32,6 +32,12 @@ class GameScores extends Component {
             
 
             this.createBottomNav()
+        } else {
+            const {
+                history,
+              } = this.props;
+
+            history.push("/");
         }
     })
 

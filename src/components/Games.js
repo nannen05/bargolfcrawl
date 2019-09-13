@@ -80,18 +80,20 @@ class Games extends Component {
               <div className="row tile">
                 <div className="slider">
                 {!!games && 
-                    <Slider {...settings}>
-                      {Object.keys(games).map(key =>
+                    // <Slider {...settings}>
+                    <div>
+                      {Object.keys(games).splice(0, 1).map(key =>
                         <div key={key} className="slide">
                           <div className="form-group form-group-slide">
                             <div>{games[key].gameName}</div>
                             <div>{this.createGameStartDate(games[key].gameDate)}</div>
                             <div>{this.createGameTimeDate(games[key].gameStartTime)}</div>
-                            <div className="center"><Link className="btn btn-block btn-lg btn-primary" to={`/game/${games[key].id}`}> Join Game </Link></div>
+                            <div className=""><Link className="btn btn-block btn-lg btn-primary" to={`/game/${games[key].id}`}> Join Game </Link></div>
                           </div>
                         </div>
                       )}
-                    </Slider>
+                    </div>
+                    // </Slider>
                 }
                 </div>
               </div>

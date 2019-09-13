@@ -37,6 +37,12 @@ class Profile extends Component {
                     authUserName: snapshot.val().username
                 })  
             })
+        } else {
+          const {
+            history,
+          } = this.props;
+
+          history.push("/");
         }
 
         this.setState({

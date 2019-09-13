@@ -17,10 +17,10 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <div class="navbar navbar-default navbar-static-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Bar Golf</a>
+            <div className="navbar navbar-default navbar-static-top" role="navigation">
+                <div className="container">
+                    <div className="navbar-header">
+                        <a className="navbar-brand" href="#">Bar Golf</a>
                     </div>
                 </div>
             </div>

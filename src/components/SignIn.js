@@ -6,7 +6,6 @@ import { auth } from '../firebase';
 
 import NavBar from './NavBar';
 import NavagationTop from './NavagationTop';
-import NavagationBottom from './NavagationBottom'
 
 
 const byPropKey = (propertyName, value) => () => ({

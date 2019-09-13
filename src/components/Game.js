@@ -84,7 +84,7 @@ class Game extends Component {
               <NavBar />
               {(!!game && !!authUser) && 
                 <div className="container">
-                    <div className="row tile">
+                    <div className="row tile game">
                         <div className="col">
                             <h3 className="tile-title">{game.gameName}</h3>
                             {!!this.state.navLinks && 

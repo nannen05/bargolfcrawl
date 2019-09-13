@@ -111,6 +111,12 @@ class GameRules extends Component {
                         }
                     ],
                 })
+            } else {
+                const {
+                    history,
+                  } = this.props;
+
+                history.push("/");
             }
         });
 
