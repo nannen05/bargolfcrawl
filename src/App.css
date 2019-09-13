@@ -544,6 +544,11 @@ span.cap {
     max-width: 100%;
 }
 
+.App .navbar .container > .navbar-header {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .App .navbar-default .navbar-brand {
     color: #34495e;
     padding-top: inherit;
