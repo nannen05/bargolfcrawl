@@ -100,7 +100,7 @@ class GameRules extends Component {
                         },
                         {
                             name: 'Score',
-                            link: `/game/${this.props.match.params.gam}/score/${firebase.auth.currentUser.uid}`, 
+                            link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
                             //link: `/game/${this.props.match.params.game}/score/`, 
                             icon: 'fui-new',
                         },
