@@ -18,6 +18,8 @@ const config = {
   messagingSenderId: MESSAGING_SENDER_ID
 };
 
+console.log(config)
+
 const FIREBASE_APP = firebase.initializeApp(config);
 
 const db = FIREBASE_APP.database()
