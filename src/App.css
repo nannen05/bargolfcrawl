@@ -1,3 +1,10 @@
+html,
+body{
+    -webkit-overflow-scrolling : touch !important;
+    overflow: auto !important;
+    height: 100% !important;
+ }
+
 .App {
   text-align: center;
   display: flex;
