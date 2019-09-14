@@ -30,6 +30,7 @@ class GameScore extends Component {
             holeNumber: null,
             playerScore: false,
             rules: null,
+            specialRules: [],
             coursePar: null,
             courseParHoles: [],
             authUser: null,
@@ -83,6 +84,13 @@ class GameScore extends Component {
                     .then(res => {
                         this.getCourseRules(res)
                         this.getCoursePar(res)
+                    })
+
+                db.getGameSpecialRules(game)
+                    .then(res => {
+                        this.setState({
+                            specialRules: res
+                        })
                     })
 
                 // Get Hole Number Limit
@@ -170,7 +178,7 @@ class GameScore extends Component {
         const { holeNumber, courseParHoles, score, rules } = this.state
 
         if(rules) {
-            //let ScoreList = this.state.score.currentScore.splice(0, holeNumber).map((value, index) =>  {
+            //let ScoreList = this.state.score.currentScore.splice(0, holeNumber + 1).map((value, index) =>  {
             let ScoreList = score.currentScore.map((value, index) =>  {   
                 return <GameScoreSingle 
                             data={value} 
@@ -184,6 +192,16 @@ class GameScore extends Component {
             return ScoreList
         }
 
+    }
+
+    createSpecialRules() {
+        const { specialRules } = this.state 
+
+        let special = specialRules.map((value, index) => {
+            return <div key={index}>{value.rule} - {value.score}</div>
+        })
+
+        return special
     }
 
     createBottomNav() {
@@ -216,7 +234,7 @@ class GameScore extends Component {
 
     render() {
 
-        const { user, coursePar, courseParHoles, score, holeNumber } = this.state
+        const { user, coursePar, courseParHoles, score, holeNumber, specialRules } = this.state
 
         return (
           <div className="App">
@@ -247,6 +265,17 @@ class GameScore extends Component {
                         ) : (
                             this.createScoreList()
                         )}
+
+                        {(specialRules.length === 0) ? (
+                            <div>Loading...</div>
+                        ) : (
+                            <div>
+                                <h4 className="tile-title">Special Rules</h4>
+                                {this.createSpecialRules()}
+                            </div>
+                        )}
+
+
                         
                     </div>
                 </div>

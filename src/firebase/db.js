@@ -50,7 +50,7 @@ export const getGame = (uid) => {
 export const setGameUser = (gameID, userID) => {
 
 	const currentScore = []
-	for (let index = 0; index < 18; index++) {
+	for (let index = 0; index < 9; index++) {
 		currentScore.push({ score: 0 })
 	}
 	const SCORE = {
@@ -156,6 +156,19 @@ export const getGameRules = (gameID) => {
 	})
 	
 	return rules
+}
+
+export const getGameSpecialRules = (gameID) => {
+	let specialRules = db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}`).once('value')
+	.then(snapshot => {
+			let gameSpecialRules = snapshot.val().gameSpecialRules
+			if(!gameSpecialRules)
+				return 
+
+			return gameSpecialRules
+	})
+	
+	return specialRules
 }
 
 export const getGameHoleNumber = (gameID) => {

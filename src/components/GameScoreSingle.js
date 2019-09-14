@@ -89,6 +89,8 @@ class GameScoreSingle extends Component {
                 scoreResult = 'Eagle'
             } else if (score == par - 3 && score == 0) {
                 scoreResult = 'Enter A Score'
+            } else {
+                scoreResult = 'Enter A Score'
             }
         } else if (score > par) {
             if(score == par + 1) {
@@ -98,6 +100,8 @@ class GameScoreSingle extends Component {
             } else {
                 scoreResult = 'Try Again'
             }
+        } else {
+            scoreResult = 'Enter A Score'
         }
 
         this.setState({
@@ -118,17 +122,42 @@ class GameScoreSingle extends Component {
 
         if(e === "") {
             console.log("empty")
-            scoreResult = ''
+            scoreResult = 'Enter A Score'
         }
+
+        if(e == this.props.par - 3) {
+            console.log('-3')
+        }
+
+        if(e == this.props.par - 2) {
+            console.log('-3')
+        }
+
+        if(e == this.props.par - 1) {
+            console.log('-3')
+        }
+
         if(e == this.props.par) {
-            scoreResult = 'Par'
+            console.log('+0')
+        }
+
+        if(e == this.props.par + 1) {
+            console.log('+1')
+        }
+
+
+
+        if(e == this.props.par) {
+            scoreResult = 'Par +0'
         } else if (e < this.props.par) {
             if(e == this.props.par - 1) {
-                scoreResult = 'Birdie'
+                scoreResult = '-1'
             } else if (e == this.props.par - 2) {
-                scoreResult = 'Eagle'
+                scoreResult = '-2'
             } else if (e == this.props.par - 3) {
-                scoreResult = 'Enter A Score'
+                scoreResult = '-3'
+            } else {
+                scoreResult = `Valid Score ${this.props.par - 3} - ${this.props.par}`
             }
         } else if (e > this.props.par) {
             if(e == this.props.par + 1) {  
@@ -138,6 +167,8 @@ class GameScoreSingle extends Component {
             } else {
                 scoreResult = 'Try Again'
             }
+        } else {
+            scoreResult = 'Enter A Score'
         }
         this.setState({
             score: scoreValue,
@@ -203,34 +234,32 @@ class GameScoreSingle extends Component {
                             <div className="rule-title">Rules</div>
                             {!!rule.eagle && (
                                 <div className="rule">
-                                    <span>Eagle </span>
+                                    <span>- 3 </span>
                                     {rule.eagle}
                                 </div>
                             )}
                             {!!rule.birdie && (
                                 <div className="rule">
-                                    <span>Birdie </span>
+                                    <span>- 2 </span>
                                     {rule.birdie}
                                 </div>
                             )}
                             {!!rule.par && (
                                 <div className="rule">
-                                    <span>Par </span>
+                                    <span>- 1 </span>
                                     {rule.par}
                                 </div>
                             )}
                             {!!rule.bogey && (
                                 <div className="rule">
-                                    <span>Bogey </span>
+                                    <span>+ 0 </span>
                                     {rule.bogey}
                                 </div>
                             )}
-                            {!!rule.doubleBogey && (
-                                <div className="rule">
-                                    <span>Double Bogey </span>
-                                    {rule.doubleBogey}
-                                </div>
-                            )}
+                            <div className="rule">
+                                <span>+ 1 </span>
+                                Drink Water
+                            </div>
                         </div>
                     </div>
                 </Modal>
