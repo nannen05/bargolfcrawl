@@ -14,6 +14,9 @@ import NavagationBottom from './NavagationBottom'
 import '../App.css';
 import '../css/flat-ui.css';
 
+const specialrule = (value, inde) => {
+    
+}
 
 class GameScore extends Component {
     constructor(props) {
@@ -269,9 +272,11 @@ class GameScore extends Component {
                         {(specialRules.length === 0) ? (
                             <div>Loading...</div>
                         ) : (
-                            <div>
+                            <div className="special-rules">
                                 <h4 className="tile-title">Special Rules</h4>
-                                {this.createSpecialRules()}
+                                <div className="tile">
+                                    {this.createSpecialRules()}
+                                </div>
                             </div>
                         )}
 

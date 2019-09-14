@@ -3,10 +3,13 @@
 }
 
 .ReactModal__Content .close {
+    -webkit-appearance: none;
     position: absolute;
     right: 10px;
     color: #34495e;
     top: 15px;
+    border: none;
+    background: transparent;
 }
 
 .ReactModal__Content .rule-title {

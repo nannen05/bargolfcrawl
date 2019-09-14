@@ -553,6 +553,7 @@ span.cap {
     width: 100%;
     min-height: 50px;
     margin-bottom: 0;
+    z-index: 8
 }
 
 .App .navbar-default .container {
@@ -574,4 +575,15 @@ span.cap {
     text-transform: uppercase;
     font-size: 20px;
     height: 38px;
+}
+
+.App .special-rules {
+    margin-top: 30px;
+}
+
+.App .special-rules .tile {    
+    background: #eff0f2;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
 }
