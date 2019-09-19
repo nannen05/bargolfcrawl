@@ -174,6 +174,42 @@ body{
 .form-group.form-group-chat {
     max-height: 400px;
     overflow: scroll;
+    padding: 15px 10px;
+}
+
+.form-group.form-group-chat .name {
+    color: #16a085;
+}
+
+.form-group.form-group-chat .message {
+    color: #34495e;
+}
+
+.form-group.form-group-chat .timestamp {
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.form-group.form-group-chat .left {
+    text-align: left;
+}
+
+.form-group.form-group-chat .right {
+    text-align: right;
+}
+
+.form-group.form-group-chat .right .form-group-col {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.form-group.form-group-chat .right .name {
+    padding-left: 5px;
+}
+
+.form-group.form-group-chat .left,
+.form-group.form-group-chat .right {
+    margin-bottom: 10px;
 }
 
 .form .input-btn {

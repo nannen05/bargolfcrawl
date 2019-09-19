@@ -185,9 +185,10 @@ export const getGameHoleNumber = (gameID) => {
 	return number
 }
 
-export const addGameMessage = (gameID, username, message) => {
+export const addGameMessage = (gameID, userID, username, message) => {
 	const data = {
 		content: message,
+		userID: userID,
 		username: username,
 		timestamp: Date.now()
 	}

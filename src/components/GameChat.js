@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
+import moment from "moment"
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
 
@@ -16,12 +17,12 @@ class GameChat extends Component {
 
         this.state = {
             game: null,
-            chat: [],
             user: null,
             userID: null,
             authUser: null,
             navLinks: [],
-            messages: []
+            messages: [],
+            message: '',
         }
         
     }
@@ -45,9 +46,10 @@ class GameChat extends Component {
                                 let doc = change.doc
                                 let messageData = {
                                     id: doc.id,
+                                    userID: doc.data().userID,
                                     username: doc.data().username,
                                     content: doc.data().content,
-                                    timestamp: doc.data().timestamp
+                                    timestamp: moment(doc.data().timestamp).format('lll')
                                 }
                                 let messages = [...this.state.messages];
                                 messages.push(messageData);
@@ -88,24 +90,32 @@ class GameChat extends Component {
     }
 
     handleSubmit(e) {
-        const { game, user, message } = this.state;
+        const { game, userID, user, message } = this.state;
 
         const data = {
             game: game.id,
+            userID: userID,
             username: user.username,
             message: message
         }
 
-        db.addGameMessage(game.id, user.username, message)
+        db.addGameMessage(game.id, userID, user.username, message)
+
+        this.setState({
+            message: ''
+        })
 
         e.preventDefault();
     }
 
     renderMessages() {
-        const { messages } = this.state 
+        const { messages, userID } = this.state 
 
         return messages.map((value, index) => {
-            return <div key={index} className=""><div className="form-group-col">{value.content}</div><div className="form-group-col">{value.timestamp}</div></div>
+            console.log(userID, 'userID')
+            console.log(value, 'value.userID')
+            let currentUser = (userID == value.userID) ? 'right' : 'left'
+            return <div key={index} className={currentUser}><div className="form-group-col"><span className="name">{value.username}</span> <span className="message">{value.content}</span></div><div className="form-group-col timestamp">{value.timestamp}</div></div>
         })
 
 
@@ -139,7 +149,10 @@ class GameChat extends Component {
                             </div>
                             <form>
                                 <div className="form-group form-group-textarea">
-                                    <textarea rows="4"  onChange={event => this.setState({ message: event.target.value })}>
+                                    <textarea rows="3"  
+                                        onChange={e => this.setState({ message: e.target.value })}
+                                        value={this.state.message}
+                                    >
                                     
                                     </textarea>
                                 </div>
