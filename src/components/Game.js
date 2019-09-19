@@ -37,27 +37,23 @@ class Game extends Component {
                         {
                             name: 'Scores',
                             link: `/game/${this.props.match.params.game}/scores/`, 
-                            //link: `/game/${this.props.match.params.game}/score/`, 
                             icon: 'fui-document',
                         },
                         {
                             name: 'Score',
                             link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
-                            //link: `/game/${this.props.match.params.game}/score/`, 
                             icon: 'fui-new',
                         },
                         {
                             name: 'Rules',
                             link: `/game/${this.props.match.params.game}/courserules`, 
-                            //link: `/game/${this.props.match.params.game}/score/`, 
                             icon: 'fui-question-circle',
                         },
-                        // {
-                        //     name: 'Chat',
-                        //     link: `/game/${this.props.match.params.game}/chat`, 
-                        //     //link: `/game/${this.props.match.params.game}/score/`, 
-                        //     icon: 'fui-chat',
-                        // },
+                        {
+                            name: 'Chat',
+                            link: `/game/${this.props.match.params.game}/chat`, 
+                            icon: 'fui-chat',
+                        },
                         {
                             name: 'Back',
                             link: `/games`,

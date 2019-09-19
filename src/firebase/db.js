@@ -1,4 +1,5 @@
 import { db } from './firebase';
+import { messagesDB } from './messages'
 import { async } from '@firebase/util';
 
 export const doCreateUser = (id, username, email, SCORE) =>
@@ -182,4 +183,25 @@ export const getGameHoleNumber = (gameID) => {
 	})
 	
 	return number
+}
+
+export const addGameMessage = (gameID, username, message) => {
+	const data = {
+		content: message,
+		username: username,
+		timestamp: Date.now()
+	}
+
+	console.log(data)
+
+	//messagesDB.collection('messages').doc(gameID.toString()).set(data)
+	messagesDB.collection(gameID.toString()).add(data)
+		.then(function() {
+			console.log("Document successfully written!");
+		})
+}
+
+export const getGameChat = (gameID) => {
+	return messagesDB.collection(gameID.toString())
+		.orderBy('timestamp')
 }

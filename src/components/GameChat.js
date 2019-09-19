@@ -17,15 +17,45 @@ class GameChat extends Component {
         this.state = {
             game: null,
             chat: [],
+            user: null,
+            userID: null,
             authUser: null,
-            navLinks: []
+            navLinks: [],
+            messages: []
         }
         
     }
 
     componentDidMount() {
+        const { game } = this.props.match.params
+
         firebase.auth.onAuthStateChanged(authUser => {
             if(firebase.auth.currentUser) {
+                
+                // Get Current User
+                db.getCurrentUser(firebase.auth.currentUser.uid).on("value", snapshot => {
+                    this.setState({ user: snapshot.val(), userID: firebase.auth.currentUser.uid })
+                })
+
+                db.getGameChat(game)
+                    .onSnapshot(querySnapshot => {
+                        
+                        querySnapshot.docChanges().forEach(change => {
+                            if(change.type === 'added') {
+                                let doc = change.doc
+                                let messageData = {
+                                    id: doc.id,
+                                    username: doc.data().username,
+                                    content: doc.data().content,
+                                    timestamp: doc.data().timestamp
+                                }
+                                let messages = [...this.state.messages];
+                                messages.push(messageData);
+                                this.setState({ messages });  
+                            }
+                        });
+                    });
+
                 this.setState({ authUser: firebase.auth.currentUser })
                 this.setState({
                     navLinks: [
@@ -37,7 +67,6 @@ class GameChat extends Component {
                         {
                             name: 'Score',
                             link: `/game/${this.props.match.params.game}/score/${firebase.auth.currentUser.uid}`, 
-                            //link: `/game/${this.props.match.params.game}/score/`, 
                             icon: 'fui-new',
                         },
                         {
@@ -47,27 +76,48 @@ class GameChat extends Component {
                         }
                     ],
                 })
+
+                console.log('chat state', this.state)
             }
-            // authUser
-            //     ? this.setState({ authUser })
-            //     : this.setState({ authUser: null });
         });
 
-        db.getGame(this.props.match.params.game).then(snapshot =>
+        db.getGame(game).then(snapshot =>
             this.setState({ game: snapshot.val() })
         );
         
     }
 
+    handleSubmit(e) {
+        const { game, user, message } = this.state;
+
+        const data = {
+            game: game.id,
+            username: user.username,
+            message: message
+        }
+
+        db.addGameMessage(game.id, user.username, message)
+
+        e.preventDefault();
+    }
+
+    renderMessages() {
+        const { messages } = this.state 
+
+        return messages.map((value, index) => {
+            return <div key={index} className=""><div className="form-group-col">{value.content}</div><div className="form-group-col">{value.timestamp}</div></div>
+        })
+
+
+    }
+
     render() {
 
-        const { game, chat, authUser } = this.state
-
-        //console.log(this.state)
+        const { game, messages, authUser, user } = this.state
     
         return (
           <div className="App">
-              {(!!game && !!authUser) && 
+              {(!!game && !!authUser &&!!user) && 
                 <div className="container">
                     <div className="row tile-header">
                         <div className="col">
@@ -81,18 +131,23 @@ class GameChat extends Component {
                         <div className="col">
                             <h4 className="tile-title">{game.gameName}</h4>
                             <div className="form-group form-group-chat">
-                                {chat.length === 0 ? (
+                                {messages.length === 0 ? (
                                     <div>Loading...</div>
                                 ) : (
-                                    <div>Chat...</div>
+                                    <div>{this.renderMessages()}</div>
                                 )}
                             </div>
-                            <div className="form-group form-group-textarea">
-                                <textarea rows="4">
-                                
-                                </textarea>
-                            </div>
-                            <div class="btn btn-block btn-lg btn-primary">SEND</div>
+                            <form>
+                                <div className="form-group form-group-textarea">
+                                    <textarea rows="4"  onChange={event => this.setState({ message: event.target.value })}>
+                                    
+                                    </textarea>
+                                </div>
+                                <div onClick={e => this.handleSubmit(e)}  
+                                     class="btn btn-block btn-lg btn-primary">
+                                    SEND
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

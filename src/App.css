@@ -171,6 +171,11 @@ body{
     padding-bottom: 14px;
 }
 
+.form-group.form-group-chat {
+    max-height: 400px;
+    overflow: scroll;
+}
+
 .form .input-btn {
     width: 100%;
     max-width: calc(100% - 38px);

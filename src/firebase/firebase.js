@@ -31,11 +31,9 @@ const FIREBASE_APP = firebase.initializeApp(config);
 
 const db = FIREBASE_APP.database()
 
-//export const DATAREF = FIREBASE_DATABASE.ref('flamelink/environments/production/content/flameLinkTest/en-US')
-
 const auth = FIREBASE_APP.auth();
 
 export {
   db,
-  auth,
+  auth
 };
