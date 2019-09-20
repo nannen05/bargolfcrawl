@@ -48,7 +48,7 @@ export const getGame = (uid) => {
 		return db.ref(`/flamelink/environments/production/content/games/en-US/${uid}`).once('value')
 }
 
-export const setGameUser = (gameID, userID) => {
+export const setGameUser = (gameID, userID, username) => {
 
 	const currentScore = []
 	for (let index = 0; index < 9; index++) {
@@ -72,6 +72,7 @@ export const setGameUser = (gameID, userID) => {
 					// Check if User Exists
 					if(!snapshot.val()) {
 						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).set( { userID, SCORE } )
+						addGameUser(gameID, userID, username)
 					}
 				})
 
@@ -192,13 +193,24 @@ export const addGameMessage = (gameID, userID, username, message) => {
 		username: username,
 		timestamp: Date.now()
 	}
-
-	console.log(data)
-
-	//messagesDB.collection('messages').doc(gameID.toString()).set(data)
+	
 	messagesDB.collection(gameID.toString()).add(data)
 		.then(function() {
 			console.log("Document successfully written!");
+		})
+}
+
+export const addGameUser = (gameID, userID, username, message) => {
+	const data = {
+		content: 'New User Joined',
+		userID: userID,
+		username: username,
+		timestamp: Date.now()
+	}
+
+	messagesDB.collection(gameID.toString()).add(data)
+		.then(function() {
+			console.log("New User successfully written!");
 		})
 }
 

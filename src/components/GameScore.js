@@ -55,7 +55,10 @@ class GameScore extends Component {
                 })
 
                 // Push Player To Game DataBase
-                db.setGameUser(game, player)
+                if(this.state.user) {
+                    db.setGameUser(game, player, this.state.user.username)
+                }
+                
 
                 // Get Player Score after User is Set
                 db.getGamePlayerScore(game, player)
@@ -65,6 +68,9 @@ class GameScore extends Component {
                             getGamePlayerScoreCallback(game, player)
                             return
                         }
+
+                        // Notify Chat of New User
+
 
                         this.setState({
                             score: res

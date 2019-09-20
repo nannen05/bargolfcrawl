@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
+import { animateScroll } from "react-scroll";
 import moment from "moment"
 import * as actions from "../store/actions";
 import { db, firebase } from '../firebase'
@@ -53,7 +54,7 @@ class GameChat extends Component {
                                 }
                                 let messages = [...this.state.messages];
                                 messages.push(messageData);
-                                this.setState({ messages });  
+                                this.setState({ messages }, this.scrollToBottom('chat'));  
                             }
                         });
                     });
@@ -86,10 +87,10 @@ class GameChat extends Component {
         db.getGame(game).then(snapshot =>
             this.setState({ game: snapshot.val() })
         );
-        
     }
 
     handleSubmit(e) {
+        console.log('handled')
         const { game, userID, user, message } = this.state;
 
         const data = {
@@ -108,17 +109,34 @@ class GameChat extends Component {
         e.preventDefault();
     }
 
+    scrollToBottom(id) {
+        animateScroll.scrollToBottom({
+          containerId: id,
+          offset: '60px'
+        });
+    }
+
     renderMessages() {
         const { messages, userID } = this.state 
 
         return messages.map((value, index) => {
-            console.log(userID, 'userID')
-            console.log(value, 'value.userID')
             let currentUser = (userID == value.userID) ? 'right' : 'left'
-            return <div key={index} className={currentUser}><div className="form-group-col"><span className="name">{value.username}</span> <span className="message">{value.content}</span></div><div className="form-group-col timestamp">{value.timestamp}</div></div>
+            if(value.content === 'New User Joined') {
+                return <div key={index} className="center">
+                            <div className="form-group-col">  
+                                <span className="name">{value.username} joined the game</span>
+                            </div>
+                            <div className="form-group-col timestamp">{value.timestamp}</div>
+                       </div>
+            } else {
+                return <div key={index} className={currentUser}>
+                            <div className="form-group-col">  
+                                <span className="name">{value.username}</span> <span className="message">{value.content}</span>
+                            </div>
+                            <div className="form-group-col timestamp">{value.timestamp}</div>
+                        </div>
+            } 
         })
-
-
     }
 
     render() {
@@ -140,11 +158,16 @@ class GameChat extends Component {
                     <div className="row tile">
                         <div className="col">
                             <h4 className="tile-title">{game.gameName}</h4>
-                            <div className="form-group form-group-chat">
+                            <div className="form-group form-group-chat" id="chat">
                                 {messages.length === 0 ? (
                                     <div>Loading...</div>
                                 ) : (
-                                    <div>{this.renderMessages()}</div>
+                                    <div>
+                                    
+                                        {this.renderMessages()}
+                                        {this.scrollToBottom('chat')}
+                                        
+                                    </div>
                                 )}
                             </div>
                             <form>
