@@ -112,7 +112,7 @@ class GameChat extends Component {
     scrollToBottom(id) {
         animateScroll.scrollToBottom({
           containerId: id,
-          offset: '60px'
+          offset: '80px'
         });
     }
 

@@ -52,13 +52,10 @@ class GameScore extends Component {
                 // Get Current User
                 db.getCurrentUser(player).on("value", snapshot => {
                     this.setState({ user: snapshot.val(), userID: this.props.match.params.player })
-                })
 
-                // Push Player To Game DataBase
-                if(this.state.user) {
+                    // Push Player To Game DataBase
                     db.setGameUser(game, player, this.state.user.username)
-                }
-                
+                })
 
                 // Get Player Score after User is Set
                 db.getGamePlayerScore(game, player)
