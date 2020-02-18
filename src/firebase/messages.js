@@ -13,7 +13,7 @@ var firebaseMessagesConfig = {
 
 const FIREBASE_APP_MESSAGES = firebase.initializeApp(firebaseMessagesConfig, 'messages');
 
-const settings = { timestampsInSnapshots: true };
+const settings = {};
 const messagesDB = FIREBASE_APP_MESSAGES.firestore()
 messagesDB.settings(settings)
 

@@ -82,7 +82,7 @@ class Games extends Component {
                 {!!games && 
                     // <Slider {...settings}>
                     <div>
-                      {Object.keys(games).splice(0, 1).map(key =>
+                      {Object.keys(games).reverse().map(key =>
                         <div key={key} className="slide">
                           <div className="form-group form-group-slide">
                             <div>{games[key].gameName}</div>

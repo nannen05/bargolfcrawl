@@ -37,9 +37,12 @@ class GameChat extends Component {
                 // Get Current User
                 db.getCurrentUser(firebase.auth.currentUser.uid).on("value", snapshot => {
                     this.setState({ user: snapshot.val(), userID: firebase.auth.currentUser.uid })
-                })
 
-                db.getGameChat(game)
+                    // Push Player To Game DataBase
+                    db.setGameUser(game, firebase.auth.currentUser.uid, this.state.user.username)
+
+                    // Trigger Message updates
+                    db.getGameChat(game)
                     .onSnapshot(querySnapshot => {
                         
                         querySnapshot.docChanges().forEach(change => {
@@ -55,9 +58,13 @@ class GameChat extends Component {
                                 let messages = [...this.state.messages];
                                 messages.push(messageData);
                                 this.setState({ messages }, this.scrollToBottom('chat'));  
+                                console.log("MESSAGES", messages)
                             }
                         });
                     });
+                })
+
+                
 
                 this.setState({ authUser: firebase.auth.currentUser })
                 this.setState({

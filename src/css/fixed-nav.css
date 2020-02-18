@@ -45,7 +45,7 @@
 }
 
 .top-nav-links.flex-wrap a:nth-child(5) {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 .top-nav-links a {
@@ -65,7 +65,7 @@
     background: #333;
     opacity: 0.15;
     top: 50%;
-    border-radius: 50%;
+    border-radius: 2px;
     transform: translate(-50%, -50%);
 }
 

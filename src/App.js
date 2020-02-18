@@ -31,6 +31,8 @@ class App extends Component {
   render() {
     return (
       <div className="App index">
+        <div className="overlay"></div>
+        <div className="background"></div>
         <div className="container">
           <div className="row tile-header">
               <div className="col">

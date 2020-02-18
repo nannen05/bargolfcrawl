@@ -13,28 +13,46 @@ body{
   align-items: center;
   /* padding: 60px 0 60px; */
   font-family: arial;
-  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  /* background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
   /* background: #1ABC9C; */
   min-height: calc(100vh);
+  background: lightgray;
 }
 
 .App.center {
     justify-content: space-evenly;
 }
 
+.overlay {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    opacity: 0.75;
+}
+
+.background {
+    background-image: url(https://www.stonecreekgolfocala.com/images/HomepageBanner1.jpg);
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+    background-size: cover;
+}
+
 .container {
     /* width: 90%; */
-    max-width: 400px;
+    max-width: 420px;
     width: 100%;
 }
 
 .App .tile-header {
-    padding: 30px 20px 50px;
+    padding: 30px 20px 10px;
 }
 
 .App .tile-header h3{
     font-size: 30px;
-    color: #fff;
+    color: #34495e;
     margin-bottom: 40px!important;
     display: block;
     position: relative;
@@ -42,7 +60,7 @@ body{
 
 .App .tile h3{
     font-size: 30px;
-    color: #fff;
+    color: #34495e;
     margin-bottom: 40px!important;
     display: block;
     position: relative;
@@ -96,10 +114,11 @@ body{
     transform: translateX(-50%);
     z-index: -1;
     bottom: 30px;
+    opacity: 0;
 }
 
 .App h4.tile-title {
-    color: #fff;
+    color: #34495e;
     margin: 0 0 25px!important;
     position: relative;
     display: block;
@@ -150,6 +169,7 @@ body{
     -ms-flex-direction: column;
     flex-direction: column;
     padding: 30px;
+    margin-bottom: 10px;
 }
 
 .form-group.form-group-textarea textarea{
@@ -246,10 +266,10 @@ body{
 
 .form-group {
     border: 2px solid #bdc3c7;
-    border-radius: 10px;
+    border-radius: 2px;
     background: #eff0f2;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .form-group:before {
@@ -439,7 +459,7 @@ a {
 }
 
 span {
-  color: #fff;
+  color:#34495e;
 }
 
 span.cap {
@@ -592,7 +612,7 @@ span.cap {
 .App .navbar-default {
     background-color: #edf0f1;
     width: 100%;
-    min-height: 50px;
+    min-height: auto;
     margin-bottom: 0;
     z-index: 8
 }
@@ -610,12 +630,13 @@ span.cap {
 .App .navbar-default .navbar-brand {
     color: #34495e;
     padding-top: inherit;
-    margin-top: 8px;
     position: relative;
-    display: block;
+    display: flex;
     text-transform: uppercase;
     font-size: 20px;
-    height: 38px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
 }
 
 .App .special-rules {
