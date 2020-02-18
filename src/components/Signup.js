@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { auth, db } from '../firebase';
 import * as actions from "../store/actions";
 import { SCORE } from '../data'
 
-import logo from '../logo.svg';
-import '../App.css';
+import NavBar from './NavBar';
+import NavagationTop from './NavagationTop';
 
 const INITIAL_STATE = {
   username: '',
@@ -28,7 +28,7 @@ class SignUp extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = (e) => {
+  handleSubmit = (e) => {
       const {
         username,
         email,
@@ -46,7 +46,7 @@ class SignUp extends Component {
           db.doCreateUser(authUser.user.uid, username, email, SCORE)
             .then(() => {
               this.setState({ ...INITIAL_STATE });
-              history.push("/score/" + authUser.user.uid);
+              history.push("/");
             })
             .catch(error => {
               this.setState(byPropKey('error', error));
@@ -57,6 +57,23 @@ class SignUp extends Component {
         });
 
       e.preventDefault();
+  }
+
+  componentDidMount() {
+    this.setState({
+      navLinks: [
+          {
+              name: 'Home',
+              link: '/',
+              icon: 'fui-home',
+          },
+          {
+            name: 'Sign In',
+            link: `/signin`, 
+            icon: 'fui-user',
+          },
+      ],
+    })
   }
 
   render() {
@@ -76,47 +93,69 @@ class SignUp extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Sign up</h2>
-        </div>
-        <p className="App-intro">
-          Fill out all fields to signup<br/><br/>
-        </p>
-        <form onSubmit={this.onSubmit}>
-          <input
-            value={username}
-            onChange={event => this.setState(byPropKey('username', event.target.value))}
-            type="text"
-            placeholder="Full Name"
-          />
-          <input
-            value={email}
-            onChange={event => this.setState(byPropKey('email', event.target.value))}
-            type="text"
-            placeholder="Email Address"
-          />
-          <input
-            value={passwordOne}
-            onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
-            type="password"
-            placeholder="Password"
-          />
-          <input
-            value={passwordTwo}
-            onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
-            type="password"
-            placeholder="Confirm Password"
-          />
-          <button disabled={isInvalid} type="submit">
-            Sign Up
-          </button>
-
-          { error && <p>{error.message}</p> }
-        </form>
-        <div className="App-login">
-          <div className="btn"><Link to="/signin"> Sign In </Link></div>
-          <div className="btn"><Link to="/"> Home </Link></div>
+        <div className="container">
+          <NavBar />
+          <div className="row tile-header">
+              <div className="col">
+                  <h3 className="tile-title">Sign Up</h3>
+                  {!!this.state.navLinks && 
+                      <NavagationTop links={this.state.navLinks} />
+                  }
+              </div>
+          </div>
+          <div className="row tile">
+              <div className="col">
+                  <form onSubmit={this.handleSubmit}>
+                      <div class="form">
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={username}
+                              onChange={event => this.setState(byPropKey('username', event.target.value))}
+                              type="text"
+                              placeholder="Full Name"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={email}
+                              onChange={event => this.setState(byPropKey('email', event.target.value))}
+                              type="text"
+                              placeholder="Email Address"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={passwordOne}
+                              onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                              type="password"
+                              placeholder="Password"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={passwordTwo}
+                              onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                              type="password"
+                              placeholder="Confirm Password"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div 
+                            onClick={e => this.handleSubmit(e)} 
+                            disabled={isInvalid}
+                            type="submit" 
+                            value="Update Info" 
+                            class="btn btn-primary btn-lg btn-block input-btn">
+                              Sign In
+                        </div>
+                          { error && <p>{error.message}</p> }
+                      </div>
+                  </form>
+              </div>
+          </div>
         </div>
       </div>
     );

@@ -71,7 +71,7 @@ export const userData = [
 
 export const SCORE = {
 	courseScore: [
-		{
+		    {
           "score": 0,
         },
         {
@@ -102,4 +102,32 @@ export const SCORE = {
 	totalScore: 0
 }
 
-//export default USERS
+export const COURSESCORES = [
+  {
+    "par": 3,
+  },
+  {
+    "par": 4,
+  },
+  {
+    "par": 3,
+  },
+  {
+    "par": 5,
+  },
+  {
+    "par": 3,
+  },
+  {
+    "par": 5,
+  },
+  {
+    "par": 4,
+  },
+  {
+    "par": 3,
+  },
+  {
+    "par": 4,
+  }
+]

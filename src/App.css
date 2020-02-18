@@ -1,13 +1,370 @@
+html,
+body{
+    -webkit-overflow-scrolling : touch !important;
+    overflow: auto !important;
+    height: 100% !important;
+ }
+
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 0 0 60px;
+  /* padding: 60px 0 60px; */
   font-family: arial;
-  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-  min-height: calc(100vh - 60px);
+  /* background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
+  /* background: #1ABC9C; */
+  min-height: calc(100vh);
+  background: lightgray;
+}
+
+.App.center {
+    justify-content: space-evenly;
+}
+
+.overlay {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    opacity: 0.75;
+}
+
+.background {
+    background-image: url(https://www.stonecreekgolfocala.com/images/HomepageBanner1.jpg);
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+    background-size: cover;
+}
+
+.container {
+    /* width: 90%; */
+    max-width: 420px;
+    width: 100%;
+}
+
+.App .tile-header {
+    padding: 30px 20px 10px;
+}
+
+.App .tile-header h3{
+    font-size: 30px;
+    color: #34495e;
+    margin-bottom: 40px!important;
+    display: block;
+    position: relative;
+}
+
+.App .tile h3{
+    font-size: 30px;
+    color: #34495e;
+    margin-bottom: 40px!important;
+    display: block;
+    position: relative;
+}
+
+.App .tile {
+    background: transparent;
+    z-index: 1;
+    /* min-height: 310px; */
+}
+
+.App .tile.game {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+}
+
+.App .tile.slide {
+    background: #eff0f2;
+    text-align: left;
+}
+
+.App .tile-header {
+    position: relative;
+    background: transparent;
+    z-index: 1;
+    /* min-height: 310px; */
+}
+
+/* .App .tile-header:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: calc(100%);
+    width: 100vw;
+    background: #333;
+    opacity: 0.1;
+    top: -40px;
+    transform: translateX(-50%);
+    z-index: -1;
+} */
+
+.App .tile-header:before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 1px;
+    width: 90%;
+    background: #fff;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: -1;
+    bottom: 30px;
+    opacity: 0;
+}
+
+.App h4.tile-title {
+    color: #34495e;
+    margin: 0 0 25px!important;
+    position: relative;
+    display: block;
+    font-size: 20px!important;
+    text-transform: uppercase;
+}
+
+.form-group-score .form-control {
+    /* width: 80%; */
+    height: 32px!important;
+    border: none!important;
+    position: relative!important;
+    padding-top: 14px!important;
+    margin-bottom: 0!important;
+    padding-bottom: 14px!important;
+    font-weight: 600!important;
+    font-size: 20px!important;
+    padding-right: 50px!important;
+    max-width: 100px;
+}   
+
+.form-group.form-group-header {
+    display: flex;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 15px 0px;
+    align-items: center;
+    position: sticky;
+    top: 30px;
+    z-index: 1;
+}
+
+.form-group.form-group-text {
+    display: flex;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 15px 0px;
+    align-items: center;
+}
+
+.form-group.form-group-slide {
+    max-width: calc(90% - 60px);
+    margin: 0 auto;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 30px;
+    margin-bottom: 10px;
+}
+
+.form-group.form-group-textarea textarea{
+    width: calc(100% - 22px);
+    padding: 10px 11px 10px;
+    height: 110px;
+    margin-bottom: -10px;
+}
+
+.form-group.form-group-input .input-field {
+    margin-bottom: 0;
+    border: none;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    height: 32px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.form-group.form-group-chat {
+    max-height: 400px;
+    overflow: scroll;
+    padding: 15px 10px;
+}
+
+.form-group.form-group-chat .name {
+    color: #16a085;
+}
+
+.form-group.form-group-chat .message {
+    color: #34495e;
+}
+
+.form-group.form-group-chat .timestamp {
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.form-group.form-group-chat .left {
+    text-align: left;
+}
+
+.form-group.form-group-chat .right {
+    text-align: right;
+}
+
+.form-group.form-group-chat .right .form-group-col {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.form-group.form-group-chat .right .name {
+    padding-left: 5px;
+}
+
+.form-group.form-group-chat .left,
+.form-group.form-group-chat .right {
+    margin-bottom: 10px;
+}
+
+.form .input-btn {
+    width: 100%;
+    max-width: calc(100% - 38px);
+    display: block;
+    text-transform: uppercase;
+    position: relative;
+    background: transparent;
+}
+
+.form .input-btn:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 45px;
+    width: 100%;
+    background: #333;
+    opacity: 0.15;
+    top: 50%;
+    border-radius: 6px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form-group.form-group-header:before,
+.form-group.form-group-text:before,
+.form-group.form-group-slide:before,
+.form-group.form-group-textarea:before,
+.form-group.form-group-chat:before,
+.form-group.form-group-input:before {
+    display: none ;
+}
+
+.form-group {
+    border: 2px solid #bdc3c7;
+    border-radius: 2px;
+    background: #eff0f2;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.form-group:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    width: 72px;
+    background: #e6e6e6;
+}
+
+.login-field-icon {
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    top: 6px;
+    font-size: 20px;
+}
+
+.label-number {
+    width: 40px;
+    position: absolute;
+    text-align: center;
+    left: 15px;
+    top: 10px;
+}
+
+.label-number-text {
+    text-transform: uppercase;
+    font-size: 10px!important;
+    line-height: 10px!important;
+}
+
+.label-number span {
+    font-size: 30px;
+    font-weight: 600;
+    color: #34495e;
+    display: block;
+    line-height: 30px;
+}
+
+.label-result {
+    position: absolute;
+    right: 40px;
+    max-width: 100px;
+    text-align: center;
+    top: 12px;
+}
+
+.label-result span {
+    font-weight: 600;
+    color: #34495e;
+}
+
+label { 
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 2.3;
+    width: 90%;
+    text-align: left;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+h3 {
+    margin-bottom: 30px!important;
+    margin-top: 15px!important;
+    text-transform: uppercase;
+}
+
+h4 {
+    font-size: 16px!important;
+    margin-top: 10px!important;
+    margin-bottom: -10px!important;
+}
+
+object {
+    max-width: 100px;
+}
+
+.btn-block {
+    margin-bottom: 20px;
+}
+
+[class^="fui-"], [class*="fui-"] {
+    font-size: 28px;
+}
+
+.login-field-icon {
+    position: absolute;
+    right: 15px;
+    width: 20px;
+    top: 6px;
+    font-size: 20px;
 }
 
 .App-logo {
@@ -52,23 +409,19 @@ color: #fff;
 .btn > a,
 .btn.signout,
 form button {
-    background: #5ED87C;
+    /* background: #5ED87C; */
     width: 100%;
     min-width: 220px;
-    display: block;
+    /* display: block; */
     text-transform: uppercase;
     width: 300px;
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     color: #fff;
     transition:0.3s;
     cursor: pointer;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px;
     border: none;
-    font-size: 16px;
-}
-
-form {
-  max-width: 300px;
+    font-size: 16px; */
 }
 
 form button:disabled {
@@ -106,7 +459,7 @@ a {
 }
 
 span {
-  color: #fff;
+  color:#34495e;
 }
 
 span.cap {
@@ -130,11 +483,19 @@ span.cap {
 .player-score {
   color: #fff;
   margin: 0 0 20px;
-  font-size: 20px;
-  border-bottom: 1px solid #fff;
+  font-size: 20px!important;
+  border-bottom: 1px solid #34495e;
   padding-bottom: 5px;
   text-align: left;
   min-width: 220px;
+}
+
+.player-score {
+    font-size: 20px;
+}
+
+.player-score span {
+    color: #34495e;
 }
 
 .player-score .right {
@@ -161,13 +522,14 @@ span.cap {
 }
 
 .slider {
-    max-width: 300px;
+    /* max-width: 100%; */
+    /* width: 100%; */
     margin: 0 auto 30px;
 }
 
-.slick-slide {
-    width: 300px;
-}
+/* .slick-slide {
+    width: 100%;
+} */
 
 .slick-dots li button::before {
     color: #fff;
@@ -185,21 +547,105 @@ span.cap {
     text-align: left;
 }
 
+.slide .btn-primary {
+    text-align: center;
+    display: block;
+    position: relative;
+    max-width: 170px;
+    margin: 20px auto 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #fff;
+    color: inherit;
     opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #fff;
+    color:inherit
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #fff;
+    color: inherit
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+.rules-slider {
+    width: 100%;
+}
+
+.rules-slider .rule-title {
+    font-size: 20px!important;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.rules-slider.rule {
+    color: #34495e;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px!important;
+    line-height: 12px!important;
+    display: flex;
+    justify-content: space-between;
+    /* max-width: 250px; */
+    margin: 0 auto 10px;
+}
+
+.rules-slider .rule span {
+    color: #34495e;
+    
+    /* text-transform: uppercase;
+    font-weight: 600;
+    //font-size: 10px!important;
+    line-height: 10px!important; */
+}
+
+.App .navbar-default {
+    background-color: #edf0f1;
+    width: 100%;
+    min-height: auto;
+    margin-bottom: 0;
+    z-index: 8
+}
+
+.App .navbar-default .container {
+    padding: 0;
+    max-width: 100%;
+}
+
+.App .navbar .container > .navbar-header {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.App .navbar-default .navbar-brand {
+    color: #34495e;
+    padding-top: inherit;
+    position: relative;
+    display: flex;
+    text-transform: uppercase;
+    font-size: 20px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+}
+
+.App .special-rules {
+    margin-top: 30px;
+}
+
+.App .special-rules .tile {    
+    background: #eff0f2;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
 }

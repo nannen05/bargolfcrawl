@@ -1,0 +1,84 @@
+.fixed-nav-bottom {
+    /* position: fixed;
+    bottom: 0; */
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 400px;
+    width: 100%;
+    /* background: #d6dbdf; */
+    padding: 10px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.fixed-nav-bottom:after {
+    /* content: "";
+    background: #d6dbdf;
+    position: absolute;
+    left: -100vw;
+    width: 200vw;
+    height: calc(100% + 20px);
+    z-index: -1;
+    bottom: -20px; */
+}
+
+.fixed-nav-bottom p {
+    margin: 10px 0 10px;
+    text-transform: uppercase;
+}
+
+.App.index .top-nav-links {
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-nav-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+.top-nav-links.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.top-nav-links.flex-wrap a:nth-child(5) {
+    /* margin-bottom: 0; */
+}
+
+.top-nav-links a {
+    width: 50%;
+    position: relative;
+    padding: 18px 0px;
+    margin-bottom: 60px;
+    min-width: 100px;
+}
+
+.top-nav-links a:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 90px;
+    width: 90px;
+    background: #333;
+    opacity: 0.15;
+    top: 50%;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+}
+
+.top-nav-links a > span {
+    position: relative;
+}
+
+.top-nav-links .text{
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    text-transform: uppercase;
+    width: 100%;
+}

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from '../logo.svg';
-import '../App.css';
 import * as actions from "../store/actions";
-import { Link, withRouter } from 'react-router-dom'
-import { auth, db } from '../firebase';
+import { withRouter } from 'react-router-dom'
+import { auth } from '../firebase';
+
+import NavBar from './NavBar';
+import NavagationTop from './NavagationTop';
+
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -25,10 +27,23 @@ class SignIn extends Component {
 
 
   componentDidMount() {
-      
+    this.setState({
+      navLinks: [
+          {
+              name: 'Home',
+              link: '/',
+              icon: 'fui-home',
+          },
+          {
+            name: 'Sign Up',
+            link: `/signup`, 
+            icon: 'fui-user',
+          },
+      ],
+    })
   }
 
-  onSubmit = (e) => {
+  handleSubmit = (e) => {
       const {
         email,
         password,
@@ -64,38 +79,52 @@ class SignIn extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Sign In</h2>
-        </div>
-        <p className="App-intro">
-          To get started, login in using GMAIL and you will be able to update your score.
-        </p>
-        <div className="App-login">
-            <form onSubmit={this.onSubmit}>
-              <input
-                value={email}
-                onChange={event => this.setState(byPropKey('email', event.target.value))}
-                type="text"
-                placeholder="Email Address"
-              />
-              <input
-                value={password}
-                onChange={event => this.setState(byPropKey('password', event.target.value))}
-                type="password"
-                placeholder="Password"
-              />
-              <button disabled={isInvalid} type="submit">
-                Sign In
-              </button>
-
-              { error && <p>{error.message}</p> }
-            </form>
-            <div className="App-login">
-              <div className="btn"><Link to="/signup"> Sign Up </Link></div>
-              <div className="btn"><Link to="/"> Home </Link></div>
-            </div>
-        </div>
+        <div className="container">
+          <NavBar />
+          <div className="row tile-header">
+              <div className="col">
+                  <h3 className="tile-title">Sign In</h3>
+                  {!!this.state.navLinks && 
+                      <NavagationTop links={this.state.navLinks} />
+                  }
+              </div>
+          </div>
+          <div className="row tile">
+              <div className="col">
+                  <form onSubmit={this.handleSubmit}>
+                      <div class="form">
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={email}
+                              onChange={event => this.setState(byPropKey('email', event.target.value))}
+                              type="text"
+                              placeholder="Email Address"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div className="form-group form-group-input">
+                            <input 
+                              value={password}
+                              onChange={event => this.setState(byPropKey('password', event.target.value))}
+                              type="password"
+                              placeholder="Password"
+                              className="input-field" 
+                            />
+                        </div>
+                        <div 
+                          onClick={e => this.handleSubmit(e)} 
+                          disabled={isInvalid}
+                          type="submit" 
+                          value="Update Info" 
+                          className="btn btn-primary btn-lg btn-block input-btn">
+                            Sign In
+                        </div>
+                        { error && <p>{error.message}</p> }
+                    </div>
+                  </form>
+              </div>
+          </div>
+        </div>        
       </div>
     );
   }
