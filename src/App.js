@@ -37,7 +37,7 @@ class App extends Component {
           <div className="row tile-header">
               <div className="col">
                   <object data={golfHole}></object>
-                  <h3 className="tile-title">Golf (Bar) Tournament</h3>
+                  <h3 className="tile-title">Bar Golf</h3>
               </div>
           </div>
         </div>

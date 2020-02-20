@@ -72,7 +72,7 @@ export const setGameUser = (gameID, userID, username) => {
 					// Check if User Exists
 					if(!snapshot.val()) {
 						db.ref(`/flamelink/environments/production/content/games/en-US/${gameID}/gameUsers/${userID}`).set( { userID, SCORE } )
-						addGameUser(gameID, userID, username)
+						addGameUserChat(gameID, userID, username)
 					}
 				})
 
@@ -200,7 +200,7 @@ export const addGameMessage = (gameID, userID, username, message) => {
 		})
 }
 
-export const addGameUser = (gameID, userID, username, message) => {
+export const addGameUserChat = (gameID, userID, username, message) => {
 	const data = {
 		content: 'New User Joined',
 		userID: userID,
@@ -210,7 +210,7 @@ export const addGameUser = (gameID, userID, username, message) => {
 
 	messagesDB.collection(gameID.toString()).add(data)
 		.then(function() {
-			console.log("New User successfully written!");
+			console.log("New User successfully written!", username);
 		})
 }
 

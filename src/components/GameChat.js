@@ -39,35 +39,33 @@ class GameChat extends Component {
                     this.setState({ user: snapshot.val(), userID: firebase.auth.currentUser.uid })
 
                     // Push Player To Game DataBase
-                    db.setGameUser(game, firebase.auth.currentUser.uid, this.state.user.username)
-
-                    // Trigger Message updates
-                    db.getGameChat(game)
-                    .onSnapshot(querySnapshot => {
-                        
-                        querySnapshot.docChanges().forEach(change => {
-                            if(change.type === 'added') {
-                                let doc = change.doc
-                                let messageData = {
-                                    id: doc.id,
-                                    userID: doc.data().userID,
-                                    username: doc.data().username,
-                                    content: doc.data().content,
-                                    timestamp: moment(doc.data().timestamp).format('lll')
-                                }
-                                let messages = [...this.state.messages];
-                                messages.push(messageData);
-                                this.setState({ messages }, this.scrollToBottom('chat'));  
-                                console.log("MESSAGES", messages)
-                            }
-                        });
-                    });
+                    //db.setGameUser(game, firebase.auth.currentUser.uid, this.state.user.username)
                 })
 
-                
+                // Trigger Message updates
+                db.getGameChat(game)
+                .onSnapshot(querySnapshot => {
+                    
+                    querySnapshot.docChanges().forEach(change => {
+                        if(change.type === 'added') {
+                            let doc = change.doc
+                            let messageData = {
+                                id: doc.id,
+                                userID: doc.data().userID,
+                                username: doc.data().username,
+                                content: doc.data().content,
+                                timestamp: moment(doc.data().timestamp).format('lll')
+                            }
+                            let messages = [...this.state.messages];
+                            messages.push(messageData);
+                            this.setState({ messages }, this.scrollToBottom('chat'));  
+                            console.log("MESSAGES", messages)
+                        }
+                    });
+                });
 
-                this.setState({ authUser: firebase.auth.currentUser })
                 this.setState({
+                    authUser: firebase.auth.currentUser,
                     navLinks: [
                         {
                             name: 'Home',
@@ -119,7 +117,7 @@ class GameChat extends Component {
     scrollToBottom(id) {
         animateScroll.scrollToBottom({
           containerId: id,
-          offset: '80px'
+          offset: '40px'
         });
     }
 
