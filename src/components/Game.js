@@ -61,8 +61,19 @@ class Game extends Component {
                         }
                     ],
                 })
+
+                db.getCurrentUser(firebase.auth.currentUser.uid).on("value", snapshot => {
+                    this.setState({ user: snapshot.val(), userID: firebase.auth.currentUser.uid })
+
+                    // Push Player To Game DataBase
+                    db.setGameUser(this.props.match.params.game, firebase.auth.currentUser.uid, this.state.user.username)
+                })
             }
         });
+
+
+
+        //db.setGameUser(this.props.match.params.game, player, this.state.user.username)
 
         db.getGame(this.props.match.params.game).then(snapshot =>
             this.setState({ game: snapshot.val() })

@@ -19,6 +19,11 @@ body{
   background: lightgray;
 }
 
+.App.index h3,
+.App.index span {
+    color: #fff!important;
+}
+
 .App.center {
     justify-content: space-evenly;
 }

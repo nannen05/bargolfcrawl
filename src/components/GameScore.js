@@ -54,7 +54,7 @@ class GameScore extends Component {
                     this.setState({ user: snapshot.val(), userID: this.props.match.params.player })
 
                     // Push Player To Game DataBase
-                    db.setGameUser(game, player, this.state.user.username)
+                    //db.setGameUser(game, player, this.state.user.username)
                 })
 
                 // Get Player Score after User is Set
@@ -67,8 +67,7 @@ class GameScore extends Component {
                         }
 
                         // Notify Chat of New User
-
-
+                        
                         this.setState({
                             score: res
                         })
